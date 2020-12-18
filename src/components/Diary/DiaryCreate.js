@@ -23,18 +23,7 @@ class DiaryCreate extends React.Component {
   };
 
   render() {
-    return (
-      <>
-        <span
-          className="mr-2"
-          onClick={this.openCreateModal}
-          style={{ color: "white", cursor: "pointer" }}
-        >
-          <i className="fad fa-plus-circle mr-1"></i>
-          Create
-        </span>
-      </>
-    );
+    return <span onClick={this.openCreateModal}>{this.props.children}</span>;
   }
 }
 

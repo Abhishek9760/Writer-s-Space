@@ -13,7 +13,14 @@ const Header = (props) => {
     if (props.user) {
       return (
         <div>
-          <DiaryCreate />
+          <DiaryCreate>
+            <span
+              className="mr-2"
+              style={{ color: "white", cursor: "pointer" }}
+            >
+              <i className="fad fa-plus-circle mr-1"></i>Create
+            </span>
+          </DiaryCreate>
           <Navbar.Text>
             <i
               className="fas fa-circle mr-1"

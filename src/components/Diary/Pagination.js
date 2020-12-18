@@ -2,6 +2,7 @@ import React from "react";
 import Page from "react-bootstrap/Pagination";
 import { connect } from "react-redux";
 import { fetchDiarys } from "../../actions";
+import DiaryCreate from "./DiaryCreate";
 
 const Pagination = (props) => {
   const getNext = () => {
@@ -21,6 +22,9 @@ const Pagination = (props) => {
       <Page.Item onClick={() => getPrev()} disabled={props.prev ? null : true}>
         <i className="fad fa-arrow-alt-left"></i>
       </Page.Item>
+      <DiaryCreate>
+        <i className="fal fa-plus-circle create"></i>
+      </DiaryCreate>
       <Page.Item onClick={() => getNext()} disabled={props.next ? null : true}>
         <i className="fad fa-arrow-alt-right"></i>
       </Page.Item>
