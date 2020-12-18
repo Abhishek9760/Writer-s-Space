@@ -1,0 +1,11 @@
+export const SIGN_IN = "SIGN_IN";
+export const SIGN_OUT = "SIGN_OUT";
+export const SIGN_UP = "SIGN_UP";
+export const HIDE_MODAL = "HIDE_MODAL";
+export const SHOW_MODAL = "SHOW_MODAL";
+export const FETCH_DIARYS = "FETCH_DIARYS";
+export const FETCH_DIARY = "FETCH_DIARY";
+export const DELETE_DIARY = "DELETE_DIARY";
+export const EDIT_DIARY = "EDIT_DIARY";
+export const CURRENT_URL = "CURRENT_URL";
+export const TOK_USERNAME = "TOK_USERNAME";

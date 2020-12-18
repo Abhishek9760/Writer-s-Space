@@ -1,0 +1,101 @@
+@font-face {
+  font-family: "amazon";
+  src: url("./static/fonts/amazon.ttf");
+}
+
+* {
+  font-family: "JetBrains Mono", monospace;
+}
+
+body {
+  height: 100vh;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+  transition: all 0.2s;
+}
+
+.link:hover {
+  text-decoration-color: white;
+  color: white;
+}
+
+.bg-light {
+  background-color: transparent !important;
+}
+
+.modal.show {
+  display: block !important;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+a.navbar-brand {
+  font-family: amazon, serif;
+  font-weight: bold;
+}
+
+.nav {
+  z-index: 1000;
+}
+
+:focus {
+  outline: 0 !important;
+}
+
+.badge-primary {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.369);
+  top: 0;
+  right: 0;
+  position: absolute;
+  font-size: 48%;
+  opacity: 0.7;
+  border-top-right-radius: inherit;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.469);
+}
+
+.card-body {
+  font-size: 85%;
+}
+
+.page-link {
+  border-radius: 50% !important;
+}
+
+.create {
+  position: fixed;
+  right: 4vw;
+  bottom: 4vh;
+  font-size: 49px;
+  color: whitesmoke;
+}
+
+.gradient {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #d5a023, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.list {
+  background-color: #4061a2d1;
+}
