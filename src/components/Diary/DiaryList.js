@@ -5,6 +5,7 @@ import Pagination from "./Pagination";
 import Accordion from "react-bootstrap/Accordion";
 import Spinner from "react-bootstrap/Spinner";
 import DiaryCreate from "./DiaryCreate";
+import DiarySearch from "./DiarySearch";
 
 import DiaryItem from "./DiaryItem";
 import Row from "react-bootstrap/Row";
@@ -33,7 +34,7 @@ class DiaryList extends React.Component {
       });
     } else if (this.props.searched) {
       return (
-        <div class="alert alert-secondary" role="alert">
+        <div className="alert alert-secondary" role="alert">
           404 Not Found
         </div>
       );
@@ -53,8 +54,8 @@ class DiaryList extends React.Component {
     return (
       <Row>
         <Col>
+          {this.props.count > 0 || this.props.searched ? <DiarySearch /> : null}
           <Accordion>{this.renderDiaryList()}</Accordion>
-          {/* {this.props.count > 10 ? <Pagination show={} /> : null} */}
           <Pagination show={this.props.count > 10 ? true : false} />
         </Col>
       </Row>

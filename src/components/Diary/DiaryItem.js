@@ -15,7 +15,10 @@ const DiaryItem = (props) => {
         {props.title}
         <Badge variant="primary">{props.timestamp}</Badge>
       </Accordion.Toggle>
-      <Accordion.Collapse eventKey={props.id}>
+      <Accordion.Collapse
+        eventKey={props.id}
+        style={{ backgroundColor: "rgba(78, 92, 120, 0.82)", color: "#fff" }}
+      >
         <Card.Body>
           <div className="text">{props.text}</div>
           <ButtonGroup size="sm" className="float-right mb-3">

@@ -17,6 +17,7 @@ class DiaryCreate extends React.Component {
         title: "Write your day",
         form: <DiaryCreateForm onSubmit={this.onSubmit} />,
         closeModal: this.props.hideModal,
+        btnLoadingStatus: "Create",
       },
       "create"
     );

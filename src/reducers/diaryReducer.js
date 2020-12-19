@@ -34,9 +34,17 @@ export default (state = INITIAL_STATE, action) => {
     case EDIT_DIARY:
       return { ...state, editDiary: action.payload };
     case SEARCH_DIARYS:
-      if (!action.payload && action.searched) {
+      if (!action.payload) {
         return { ...state, searched: action.searched };
       }
+
+      action.payload.results = _.map(action.payload.results, (item) => {
+        item.timestamp = moment(new Date(item.timestamp)).format(
+          "[On] D MMM YYYY, [at] h:mm A"
+        );
+        return item;
+      });
+
       return { ...state, ...action.payload, searched: action.searched };
     case SEARCH_LOADING:
       return { ...state, search: action.search };
