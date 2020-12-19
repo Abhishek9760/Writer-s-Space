@@ -50,7 +50,7 @@ a.navbar-brand {
   top: 0;
   right: 0;
   position: absolute;
-  font-size: 48%;
+  font-size: 52%;
   opacity: 0.7;
   border-top-right-radius: inherit;
   border-top-left-radius: 0;
@@ -103,8 +103,8 @@ a.navbar-brand {
 .search-icon {
   position: absolute;
   right: 5px;
-  bottom: 13%;
-  font-size: 22px;
+  bottom: 26%;
+  font-size: 18px;
   color: #627db2;
 }
 

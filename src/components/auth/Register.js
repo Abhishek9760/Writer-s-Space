@@ -9,6 +9,9 @@ import { signUp } from "../../actions";
 import RegisterForm from "./RegisterForm";
 
 class Register extends React.Component {
+  state = {
+    btnText: "Register",
+  };
   componentDidMount() {
     let { cookies } = this.props;
     if (cookies.get("authtoken")) {
@@ -22,6 +25,7 @@ class Register extends React.Component {
   }
 
   onSubmit = (formValues) => {
+    this.setState({ btnText: "loading" });
     this.props.signUp(formValues);
   };
   render() {
@@ -33,7 +37,10 @@ class Register extends React.Component {
         {(props) => (
           <div style={props}>
             <h1 className="mb-3">Register</h1>
-            <RegisterForm onSubmit={this.onSubmit} />
+            <RegisterForm
+              onSubmit={this.onSubmit}
+              btnText={this.state.btnText}
+            />
             <p className="my-2">
               Already a user?{" "}
               <Link to="/" className="link">

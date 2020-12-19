@@ -79,7 +79,17 @@ class RegisterForm extends React.Component {
         />
         <ButtonGroup aria-label="Basic example">
           <Button type="submit" varient="primary">
-            Register
+            {this.props.btnText === "loading" ? (
+              <Spinner
+                as="span"
+                animation="border"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+              />
+            ) : (
+              "Register"
+            )}
           </Button>
           <Button
             variant="danger"

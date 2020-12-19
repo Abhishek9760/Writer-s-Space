@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import DiarySearchForm from "./Forms/DiarySearchForm";
 import { connect } from "react-redux";
 import { searchDiarys } from "../../actions";
@@ -9,9 +9,13 @@ const DiarySearch = (props) => {
   };
   return (
     <div>
-      <DiarySearchForm onSubmit={onSubmit} />
+      <DiarySearchForm loading={props.search} onSubmit={onSubmit} />
     </div>
   );
 };
 
-export default connect(null, { searchDiarys })(DiarySearch);
+const mapStateToProps = ({ diaries: { search } }) => {
+  return { search };
+};
+
+export default connect(mapStateToProps, { searchDiarys })(DiarySearch);

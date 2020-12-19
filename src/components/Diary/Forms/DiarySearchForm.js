@@ -1,6 +1,6 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
-import Alert from "react-bootstrap/Alert";
+import Spinner from "react-bootstrap/Spinner";
 
 class DiaryForm extends React.Component {
   renderInput = ({ input }) => {
@@ -31,7 +31,19 @@ class DiaryForm extends React.Component {
           className="form-control"
           label="Search"
         />
-        <i className="fad fa-search search-icon"></i>
+
+        {this.props.loading ? (
+          <Spinner
+            className="search-icon"
+            as="span"
+            animation="border"
+            size="sm"
+            role="status"
+            aria-hidden="true"
+          />
+        ) : (
+          <i className="fad fa-search search-icon"></i>
+        )}
       </form>
     );
   }

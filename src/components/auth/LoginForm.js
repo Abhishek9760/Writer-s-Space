@@ -52,8 +52,8 @@ class LoginForm extends React.Component {
           component={this.renderInput}
           label="Enter password"
         />
-        <Button type="submit" varient="primary">
-          Login
+        <Button type="submit" varient="primary" disabled={this.props.disabled}>
+          {this.props.btnText}
         </Button>
       </Form>
     );

@@ -2,11 +2,13 @@ import {
   FETCH_DIARYS,
   FETCH_DIARY,
   EDIT_DIARY,
+  SEARCH_LOADING,
   SEARCH_DIARYS,
 } from "../actions/types";
 import _ from "lodash";
 import moment from "moment";
 const INITIAL_STATE = {
+  search: false,
   count: null,
   next: null,
   pervious: null,
@@ -32,6 +34,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, editDiary: action.payload };
     case SEARCH_DIARYS:
       return { ...state, ...action.payload };
+    case SEARCH_LOADING:
+      return { ...state, search: action.search };
     default:
       return state;
   }

@@ -2,6 +2,7 @@ import axios from "../utils/DiaryApi";
 import history from "../history";
 import {
   SIGN_IN,
+  SIGN_IN_LOADING,
   SIGN_UP,
   SHOW_MODAL,
   HIDE_MODAL,
@@ -10,6 +11,7 @@ import {
   FETCH_DIARYS,
   FETCH_DIARY,
   SEARCH_DIARYS,
+  SEARCH_LOADING,
   RESET,
   EDIT_DIARY,
 } from "./types";
@@ -35,12 +37,13 @@ export const reset = () => (dispatch) => {
 };
 
 export const signIn = (formValues) => async (dispatch) => {
+  dispatch({ type: SIGN_IN_LOADING, isSignedIn: "loading" });
   try {
     const response = await axios.post("/auth/", { ...formValues });
     dispatch({ type: SIGN_IN, payload: response.data });
     history.push("/diary");
   } catch (error) {
-    console.log(error);
+    dispatch({ type: SIGN_IN_LOADING, isSignedIn: "false" });
     if (error.response.status == 401) {
       dispatch(
         showModal({
@@ -82,7 +85,7 @@ export const currentURL = (url) => (dispatch) => {
 };
 
 export const searchDiarys = (query) => async (dispatch, getState) => {
-  // console.log(query);
+  dispatch({ type: SEARCH_LOADING, search: true });
   if (!query) {
     return dispatch(fetchDiarys());
   }
@@ -97,6 +100,7 @@ export const searchDiarys = (query) => async (dispatch, getState) => {
       },
     }
   );
+  dispatch({ type: SEARCH_LOADING, search: false });
   dispatch({ type: SEARCH_DIARYS, payload: response.data });
 };
 
@@ -126,6 +130,7 @@ export const fetchDiarys = (next = null, prev = null, mainUrl = null) => async (
     },
   });
   let payload = response.data;
+  dispatch({ type: SEARCH_LOADING, search: false });
   dispatch({ type: FETCH_DIARYS, payload: payload });
 };
 

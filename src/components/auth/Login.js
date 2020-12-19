@@ -1,13 +1,12 @@
 import React from "react";
 import LoginForm from "./LoginForm";
+import Spinner from "react-bootstrap/Spinner";
 import { signIn } from "../../actions";
 import { connect } from "react-redux";
 import { withCookies } from "react-cookie";
 import history from "../../history";
 
 import { showModal, hideModal } from "../../actions";
-
-const MESSAGE = "Username or Password is not correct.";
 
 const mapDispatchToProps = (dispatch) => ({
   hideModal: () => dispatch(hideModal()),
@@ -37,38 +36,6 @@ class Login extends React.Component {
     this.props.hideModal();
   };
 
-  showInput = () => {
-    const { address } = this.state;
-    const message = address ? `Address: ${address}` : "No address entered";
-    this.props.showModal(
-      {
-        open: true,
-        title: "Prompt Modal",
-        message,
-        closeModal: this.closeModal,
-      },
-      "alert"
-    );
-  };
-
-  onInputChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
-  };
-
-  openAlertModal = () => {
-    this.props.showModal(
-      {
-        open: true,
-        title: "Invalid Credentials",
-        message: MESSAGE,
-        closeModal: this.closeModal,
-      },
-      "alert"
-    );
-  };
-
   componentWillUnmount() {
     let user = this.props.user;
     if (user) {
@@ -82,7 +49,23 @@ class Login extends React.Component {
     return (
       <div>
         <h1 className="mb-3">Login</h1>
-        <LoginForm onSubmit={this.onSubmit} />
+        <LoginForm
+          onSubmit={this.onSubmit}
+          btnText={
+            this.props.isSignedIn === "loading" ? (
+              <Spinner
+                as="span"
+                animation="border"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+              />
+            ) : (
+              "Login"
+            )
+          }
+          disabled={this.props.isSignedIn === "loading" ? true : false}
+        />
       </div>
     );
   }
@@ -93,6 +76,30 @@ const mapStateToProps = (state) => {
 };
 
 export default withCookies(connect(mapStateToProps, mapDispatchToProps)(Login));
+// openAlertModal = () => {
+//   this.props.showModal(
+//     {
+//       open: true,
+//       title: "Invalid Credentials",
+//       message: MESSAGE,
+//       closeModal: this.closeModal,
+//     },
+//     "alert"
+//   );
+// };
+// showInput = () => {
+//   const { address } = this.state;
+//   const message = address ? `Address: ${address}` : "No address entered";
+//   this.props.showModal(
+//     {
+//       open: true,
+//       title: "Prompt Modal",
+//       message,
+//       closeModal: this.closeModal,
+//     },
+//     "alert"
+//   );
+// };
 
 // openConfirmModal = () => {
 //   this.props.showModal(
