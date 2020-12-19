@@ -1,7 +1,6 @@
 import React from "react";
-import Spinner from "react-bootstrap/Spinner";
 
-const diaryCreateModal = ({ title, closeModal, form, btnLoadingStatus }) => {
+const diaryCreateModal = ({ title, closeModal, form }) => {
   return (
     <div className="modal-content">
       <div className="modal-header">
@@ -20,7 +19,7 @@ const diaryCreateModal = ({ title, closeModal, form, btnLoadingStatus }) => {
       <div className="modal-body">{form}</div>
       <div className="modal-footer">
         <button type="submit" form="diary-form" className="btn btn-primary">
-          {btnLoadingStatus}
+          Save Changes
         </button>
         <button
           type="button"

@@ -7,7 +7,6 @@ import { DiaryCreateForm } from "./Forms/DiaryForm";
 class DiaryCreate extends React.Component {
   onSubmit = (formValues) => {
     this.props.createDiary(formValues);
-    this.props.hideModal();
   };
 
   openCreateModal = () => {
@@ -17,7 +16,6 @@ class DiaryCreate extends React.Component {
         title: "Write your day",
         form: <DiaryCreateForm onSubmit={this.onSubmit} />,
         closeModal: this.props.hideModal,
-        btnLoadingStatus: "Create",
       },
       "create"
     );

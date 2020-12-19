@@ -15,6 +15,7 @@ import {
   RESET,
   EDIT_DIARY,
 } from "./types";
+import FormData from "form-data";
 
 export const showModal = ({ modalProps, modalType }) => (dispatch) => {
   dispatch({
@@ -161,17 +162,23 @@ export const fetchDiary = (id = null, empty = false) => async (
 
 export const createDiary = (formValues) => async (dispatch, getState) => {
   let token = getState().data.user.token;
-
-  await axios.post(
-    "/diary/",
-    { ...formValues },
-    {
-      headers: {
-        Authorization: `JWT ${token}`,
-      },
-    }
-  );
+  let data = new FormData();
+  data.append("title", formValues.title);
+  data.append("text", formValues.text);
+  if (formValues.image) {
+    data.append("image", formValues.image);
+  }
+  // for (var pair of data.entries()) {
+  //   console.log(pair[0] + ", " + pair[1]);
+  // }
+  await axios.post("/diary/", data, {
+    headers: {
+      Authorization: `JWT ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
   dispatch(fetchDiarys());
+  dispatch(hideModal());
 };
 
 export const deleteDiary = (id) => async (dispatch, getState) => {
@@ -190,10 +197,16 @@ export const deleteDiary = (id) => async (dispatch, getState) => {
 
 export const editDiary = (id, formValues) => async (dispatch, getState) => {
   let token = getState().data.user.token;
-
-  const response = await axios.put(`/diary/${id}/`, formValues, {
+  let data = new FormData();
+  data.append("title", formValues.title);
+  data.append("text", formValues.text);
+  if (formValues.image && typeof formValues.image !== "string") {
+    data.append("image", formValues.image);
+  }
+  const response = await axios.put(`/diary/${id}/`, data, {
     headers: {
       Authorization: `JWT ${token}`,
+      "Content-Type": "multipart/form-data",
     },
   });
   const mainUrl = getState().url.url;

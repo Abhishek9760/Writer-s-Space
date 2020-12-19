@@ -7,6 +7,9 @@ import Card from "react-bootstrap/Card";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import DiaryDelete from "./DiaryDelete";
 import DiaryEdit from "./DiaryEdit";
+import Image from "react-bootstrap/Image";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const DiaryItem = (props) => {
   return (
@@ -20,7 +23,14 @@ const DiaryItem = (props) => {
         style={{ backgroundColor: "rgba(78, 92, 120, 0.82)", color: "#fff" }}
       >
         <Card.Body>
-          <div className="text">{props.text}</div>
+          {props.image ? (
+            <Row>
+              <Col xs={12} md={6} lg={6}>
+                <Image src={props.image} thumbnail></Image>
+              </Col>
+            </Row>
+          ) : null}
+          <div className="text my-2">{props.text}</div>
           <ButtonGroup size="sm" className="float-right mb-3">
             <DiaryDelete id={props.id} />
             <DiaryEdit id={props.id} />

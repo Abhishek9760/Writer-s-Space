@@ -28,6 +28,7 @@ class DiaryList extends React.Component {
             title={diary.title}
             text={diary.text}
             timestamp={diary.timestamp}
+            image={diary.image}
             key={diary.id}
           />
         );

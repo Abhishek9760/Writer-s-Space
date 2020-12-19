@@ -3,6 +3,7 @@ import { Field, reduxForm } from "redux-form";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
 import { connect } from "react-redux";
+import FieldFileInput from "./FileField";
 
 class DiaryForm extends React.Component {
   renderError({ error, touched }) {
@@ -24,7 +25,7 @@ class DiaryForm extends React.Component {
         <Form.Control
           as={as}
           autoComplete="off"
-          placeholder={`Enter`}
+          placeholder={label.replace("Enter ", "")}
           className={classes}
           {...input}
         />
@@ -42,6 +43,7 @@ class DiaryForm extends React.Component {
       <Form id="diary-form" onSubmit={this.props.handleSubmit(this.onSubmit)}>
         <Field name="title" component={this.renderInput} label="Enter title" />
         <Field name="text" component={this.renderInput} label="Enter text" />
+        <Field name="image" component={FieldFileInput} name="image" />
       </Form>
     );
   }
@@ -52,8 +54,8 @@ const validate = (formValues) => {
   if (!formValues.title) {
     errors.title = "You must enter a title";
   }
-  if (!formValues.text) {
-    errors.text = "You must enter a text";
+  if (!formValues.text && !formValues.image) {
+    errors.text = "You must enter a text or image";
   }
   return errors;
 };
@@ -69,6 +71,7 @@ const mapStateToProps = ({ diaries: { currentDiary } }) => ({
   initialValues: {
     title: currentDiary.title,
     text: currentDiary.text,
+    image: currentDiary.image,
   },
 });
 export const DiaryEditForm = connect(
