@@ -101,7 +101,7 @@ export const searchDiarys = (query) => async (dispatch, getState) => {
     }
   );
   dispatch({ type: SEARCH_LOADING, search: false });
-  dispatch({ type: SEARCH_DIARYS, payload: response.data });
+  dispatch({ type: SEARCH_DIARYS, payload: response.data, searched: true });
 };
 
 export const fetchDiarys = (next = null, prev = null, mainUrl = null) => async (
@@ -130,6 +130,7 @@ export const fetchDiarys = (next = null, prev = null, mainUrl = null) => async (
     },
   });
   let payload = response.data;
+  dispatch({ type: SEARCH_DIARYS, searched: false });
   dispatch({ type: SEARCH_LOADING, search: false });
   dispatch({ type: FETCH_DIARYS, payload: payload });
 };

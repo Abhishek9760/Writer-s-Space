@@ -9,6 +9,7 @@ import _ from "lodash";
 import moment from "moment";
 const INITIAL_STATE = {
   search: false,
+  searched: false,
   count: null,
   next: null,
   pervious: null,
@@ -33,7 +34,10 @@ export default (state = INITIAL_STATE, action) => {
     case EDIT_DIARY:
       return { ...state, editDiary: action.payload };
     case SEARCH_DIARYS:
-      return { ...state, ...action.payload };
+      if (!action.payload && action.searched) {
+        return { ...state, searched: action.searched };
+      }
+      return { ...state, ...action.payload, searched: action.searched };
     case SEARCH_LOADING:
       return { ...state, search: action.search };
     default:

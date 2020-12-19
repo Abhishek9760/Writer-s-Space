@@ -31,6 +31,12 @@ class DiaryList extends React.Component {
           />
         );
       });
+    } else if (this.props.searched) {
+      return (
+        <div class="alert alert-secondary" role="alert">
+          404 Not Found
+        </div>
+      );
     } else if (diaries.count === 0) {
       return (
         <p>
@@ -56,8 +62,8 @@ class DiaryList extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { diaries: state.diaries, count: state.diaries.count };
+const mapStateToProps = ({ diaries }) => {
+  return { diaries: diaries, count: diaries.count, searched: diaries.searched };
 };
 
 export default connect(mapStateToProps, { fetchDiarys })(DiaryList);
