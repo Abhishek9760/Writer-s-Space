@@ -5,6 +5,7 @@ import diaryReducer from "./diaryReducer";
 import modalReducer from "./modalReducer";
 import { reducer as formReducer } from "redux-form";
 import currentURLReducer from "./currentURLReducer";
+import { RESET } from "../actions/types";
 
 const appReducer = combineReducers({
   data: authReducer,
@@ -15,7 +16,7 @@ const appReducer = combineReducers({
 });
 
 export default (state, action) => {
-  if (action.type === "RESET") {
+  if (action.type === RESET) {
     state = undefined;
   }
 

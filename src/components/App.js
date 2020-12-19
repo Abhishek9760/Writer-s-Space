@@ -9,7 +9,6 @@ import DiaryHome from "./Diary/DiaryHome";
 import ModalRoot from "../ModalRoot";
 import { connect } from "react-redux";
 import { hideModal } from "../actions";
-import { useSpring, animated } from "react-spring";
 
 import "../template.css";
 
@@ -19,23 +18,9 @@ const App = (props) => {
       <Header />
       <div className="container">
         <Router history={history}>
-          <Route
-            path="/"
-            exact
-            render={(props) => {
-              let classes = "";
-              if (props.location.pathname === "/") {
-                classes = "gradient";
-              }
-              return <Home classes={classes} {...props} />;
-            }}
-          />
+          <Route path="/" exact component={Home} />
           <Route path="/diary" exact component={DiaryHome} />
-          <Route
-            path="/register"
-            exact
-            render={(props) => <Register {...props} />}
-          />
+          <Route path="/register" exact component={Register} />
         </Router>
       </div>
       <ModalRoot hideModal={props.hideModal} />

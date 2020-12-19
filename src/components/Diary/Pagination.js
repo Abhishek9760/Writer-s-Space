@@ -18,14 +18,25 @@ const Pagination = (props) => {
   };
 
   return (
-    <Page className="my-3" style={{ justifyContent: "space-between" }}>
-      <Page.Item onClick={() => getPrev()} disabled={props.prev ? null : true}>
+    <Page
+      className="my-3"
+      style={{ justifyContent: props.show ? "space-between" : "center" }}
+    >
+      <Page.Item
+        className={props.show ? "" : "d-none"}
+        onClick={() => getPrev()}
+        disabled={props.prev ? null : true}
+      >
         <i className="fad fa-arrow-alt-left"></i>
       </Page.Item>
       <DiaryCreate>
         <i className="fal fa-plus-circle create"></i>
       </DiaryCreate>
-      <Page.Item onClick={() => getNext()} disabled={props.next ? null : true}>
+      <Page.Item
+        className={props.show ? "" : "d-none"}
+        onClick={() => getNext()}
+        disabled={props.next ? null : true}
+      >
         <i className="fad fa-arrow-alt-right"></i>
       </Page.Item>
     </Page>

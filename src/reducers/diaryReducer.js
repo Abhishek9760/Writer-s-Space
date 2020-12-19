@@ -1,4 +1,9 @@
-import { FETCH_DIARYS, FETCH_DIARY, EDIT_DIARY } from "../actions/types";
+import {
+  FETCH_DIARYS,
+  FETCH_DIARY,
+  EDIT_DIARY,
+  SEARCH_DIARYS,
+} from "../actions/types";
 import _ from "lodash";
 import moment from "moment";
 const INITIAL_STATE = {
@@ -25,6 +30,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, currentDiary: action.payload };
     case EDIT_DIARY:
       return { ...state, editDiary: action.payload };
+    case SEARCH_DIARYS:
+      return { ...state, ...action.payload };
     default:
       return state;
   }

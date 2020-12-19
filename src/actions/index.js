@@ -9,7 +9,8 @@ import {
   TOK_USERNAME,
   FETCH_DIARYS,
   FETCH_DIARY,
-  DELETE_DIARY,
+  SEARCH_DIARYS,
+  RESET,
   EDIT_DIARY,
 } from "./types";
 
@@ -29,7 +30,7 @@ export const hideModal = () => (dispatch) => {
 
 export const reset = () => (dispatch) => {
   dispatch({
-    type: "RESET",
+    type: RESET,
   });
 };
 
@@ -78,6 +79,25 @@ export const currentURL = (url) => (dispatch) => {
     type: CURRENT_URL,
     payload: url,
   });
+};
+
+export const searchDiarys = (query) => async (dispatch, getState) => {
+  // console.log(query);
+  if (!query) {
+    return dispatch(fetchDiarys());
+  }
+  let token = getState().data.user.token;
+  let username = getState().data.user.username;
+
+  const response = await axios.get(
+    `/user/${username}/diary/?ordering=-timestamp&q=${query}`,
+    {
+      headers: {
+        Authorization: `JWT ${token}`,
+      },
+    }
+  );
+  dispatch({ type: SEARCH_DIARYS, payload: response.data });
 };
 
 export const fetchDiarys = (next = null, prev = null, mainUrl = null) => async (

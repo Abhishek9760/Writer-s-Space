@@ -2,7 +2,7 @@ import React from "react";
 import { showModal, hideModal, editDiary } from "../../actions";
 import { connect } from "react-redux";
 import Button from "react-bootstrap/Button";
-import { DiaryEditForm } from "./DiaryForm";
+import { DiaryEditForm } from "./Forms/DiaryForm";
 
 const EditDiary = (props) => {
   const openEditModal = () => {

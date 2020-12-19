@@ -48,7 +48,8 @@ class DiaryList extends React.Component {
       <Row>
         <Col>
           <Accordion>{this.renderDiaryList()}</Accordion>
-          {this.props.count > 10 ? <Pagination /> : null}
+          {/* {this.props.count > 10 ? <Pagination show={} /> : null} */}
+          <Pagination show={this.props.count > 10 ? true : false} />
         </Col>
       </Row>
     );

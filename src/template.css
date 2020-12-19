@@ -100,6 +100,14 @@ a.navbar-brand {
   background-color: #4061a2d1;
 }
 
+.search-icon {
+  position: absolute;
+  right: 5px;
+  bottom: 13%;
+  font-size: 22px;
+  color: #627db2;
+}
+
 @media (max-width: 480px) {
   .create {
     position: inherit;

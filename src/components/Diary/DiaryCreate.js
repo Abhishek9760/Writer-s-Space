@@ -2,7 +2,7 @@ import React from "react";
 import { createDiary, showModal, hideModal } from "../../actions";
 
 import { connect } from "react-redux";
-import { DiaryCreateForm } from "./DiaryForm";
+import { DiaryCreateForm } from "./Forms/DiaryForm";
 
 class DiaryCreate extends React.Component {
   onSubmit = (formValues) => {
