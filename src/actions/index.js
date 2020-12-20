@@ -210,7 +210,9 @@ export const editDiary = (id, formValues) => async (dispatch, getState) => {
   let data = new FormData();
   dispatch({ type: LOADING, Loading: true });
   data.append("title", formValues.title);
-  data.append("text", formValues.text);
+  if (formValues.text) {
+    data.append("text", formValues.text);
+  }
   if (formValues.image && typeof formValues.image !== "string") {
     data.append("image", formValues.image);
   }
