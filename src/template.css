@@ -9,6 +9,7 @@
 
 body {
   height: 100vh;
+  font-size: 1.3rem;
 }
 
 .link {
@@ -113,6 +114,15 @@ a.navbar-brand {
     position: inherit;
     font-size: 39px;
   }
+
+  body {
+    font-size: 1rem;
+  }
+}
+
+.image-upload {
+  width: 1.3rem;
+  height: 1.3rem;
 }
 
 /* @media (min-width:320px)  { smartphones, portrait iPhone, portrait 480x320 phones (Android) } */

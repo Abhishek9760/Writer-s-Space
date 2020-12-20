@@ -1,6 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
+import Spinner from "react-bootstrap/Spinner";
 
-const diaryCreateModal = ({ title, closeModal, form }) => {
+const diaryCreateModal = ({ title, closeModal, form, btnLoading }) => {
+  console.log(btnLoading);
   return (
     <div className="modal-content">
       <div className="modal-header">
@@ -18,8 +21,27 @@ const diaryCreateModal = ({ title, closeModal, form }) => {
       </div>
       <div className="modal-body">{form}</div>
       <div className="modal-footer">
-        <button type="submit" form="diary-form" className="btn btn-primary">
-          Save Changes
+        <button
+          type="submit"
+          form="diary-form"
+          className="btn btn-primary"
+          disabled={btnLoading}
+        >
+          {btnLoading ? (
+            <>
+              <Spinner
+                className="image-upload"
+                as="span"
+                animation="border"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+              />
+              <span>Saving...</span>
+            </>
+          ) : (
+            "Save Changes"
+          )}
         </button>
         <button
           type="button"
@@ -34,4 +56,8 @@ const diaryCreateModal = ({ title, closeModal, form }) => {
   );
 };
 
-export default diaryCreateModal;
+const mapStateToProps = ({ diaries: { Loading } }) => {
+  return { btnLoading: Loading };
+};
+
+export default connect(mapStateToProps, {})(diaryCreateModal);

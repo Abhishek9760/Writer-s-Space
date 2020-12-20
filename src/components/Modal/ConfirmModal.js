@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import Spinner from "react-bootstrap/Spinner";
 
 const confirmModal = ({
   title,
@@ -7,6 +9,7 @@ const confirmModal = ({
   confirmAction,
   confirmBtnText,
   cancelBtnText,
+  btnLoading,
 }) => {
   return (
     <div className="modal-content">
@@ -25,8 +28,25 @@ const confirmModal = ({
       </div>
       <div className="modal-body">{text}</div>
       <div className="modal-footer">
-        <button onClick={confirmAction} className="btn btn-primary">
-          {confirmBtnText || "Yes"}
+        <button
+          onClick={confirmAction}
+          className="btn btn-primary"
+          disabled={btnLoading}
+        >
+          {btnLoading ? (
+            <>
+              <Spinner
+                className="image-upload"
+                as="span"
+                animation="border"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+              />
+            </>
+          ) : (
+            confirmBtnText || "Yes"
+          )}
         </button>
         <button
           type="button"
@@ -41,4 +61,8 @@ const confirmModal = ({
   );
 };
 
-export default confirmModal;
+const mapStateToProps = ({ diaries: { Loading } }) => {
+  return { btnLoading: Loading };
+};
+
+export default connect(mapStateToProps, {})(confirmModal);

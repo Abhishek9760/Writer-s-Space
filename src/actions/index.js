@@ -14,6 +14,7 @@ import {
   SEARCH_LOADING,
   RESET,
   EDIT_DIARY,
+  LOADING,
 } from "./types";
 import FormData from "form-data";
 
@@ -162,9 +163,13 @@ export const fetchDiary = (id = null, empty = false) => async (
 
 export const createDiary = (formValues) => async (dispatch, getState) => {
   let token = getState().data.user.token;
+
+  dispatch({ type: LOADING, Loading: true });
   let data = new FormData();
   data.append("title", formValues.title);
-  data.append("text", formValues.text);
+  if (formValues.text) {
+    data.append("text", formValues.text);
+  }
   if (formValues.image) {
     data.append("image", formValues.image);
   }
@@ -177,19 +182,24 @@ export const createDiary = (formValues) => async (dispatch, getState) => {
       "Content-Type": "multipart/form-data",
     },
   });
+  if (formValues.image) {
+    dispatch({ type: LOADING, Loading: false });
+  }
   dispatch(fetchDiarys());
   dispatch(hideModal());
 };
 
 export const deleteDiary = (id) => async (dispatch, getState) => {
   let token = getState().data.user.token;
-  let username = getState().data.user.username;
+
+  dispatch({ type: LOADING, Loading: true });
 
   await axios.delete(`/diary/${id}/`, {
     headers: {
       Authorization: `JWT ${token}`,
     },
   });
+  dispatch({ type: LOADING, Loading: false });
   dispatch(hideModal());
   dispatch(fetchDiarys());
   dispatch(fetchDiary(null, true));
@@ -198,6 +208,7 @@ export const deleteDiary = (id) => async (dispatch, getState) => {
 export const editDiary = (id, formValues) => async (dispatch, getState) => {
   let token = getState().data.user.token;
   let data = new FormData();
+  dispatch({ type: LOADING, Loading: true });
   data.append("title", formValues.title);
   data.append("text", formValues.text);
   if (formValues.image && typeof formValues.image !== "string") {
@@ -209,6 +220,8 @@ export const editDiary = (id, formValues) => async (dispatch, getState) => {
       "Content-Type": "multipart/form-data",
     },
   });
+  dispatch({ type: LOADING, Loading: false });
+  dispatch(hideModal());
   const mainUrl = getState().url.url;
   dispatch({ type: EDIT_DIARY, payload: response.data });
   dispatch(fetchDiarys(null, null, mainUrl));

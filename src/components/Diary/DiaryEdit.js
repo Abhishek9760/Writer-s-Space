@@ -20,7 +20,6 @@ const EditDiary = (props) => {
   const onSubmit = (formValues) => {
     let id = props.id;
     props.editDiary(id, formValues);
-    props.hideModal();
   };
 
   return (

@@ -3,6 +3,7 @@ import {
   FETCH_DIARY,
   EDIT_DIARY,
   SEARCH_LOADING,
+  LOADING,
   SEARCH_DIARYS,
 } from "../actions/types";
 import _ from "lodash";
@@ -17,6 +18,7 @@ const INITIAL_STATE = {
   currentDiary: {},
   currentURL: null,
   editDiary: {},
+  Loading: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -33,6 +35,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, currentDiary: action.payload };
     case EDIT_DIARY:
       return { ...state, editDiary: action.payload };
+    case LOADING:
+      return { ...state, Loading: action.Loading };
     case SEARCH_DIARYS:
       if (!action.payload) {
         return { ...state, searched: action.searched };

@@ -23,14 +23,17 @@ const DiaryItem = (props) => {
         style={{ backgroundColor: "rgba(78, 92, 120, 0.82)", color: "#fff" }}
       >
         <Card.Body>
-          {props.image ? (
-            <Row>
-              <Col xs={12} md={6} lg={6}>
-                <Image src={props.image} thumbnail></Image>
+          <Row>
+            {props.image ? (
+              <Col xs={12} sm={6} md={6} lg={6}>
+                <Image className="image" src={props.image} thumbnail></Image>
               </Col>
-            </Row>
-          ) : null}
-          <div className="text my-2">{props.text}</div>
+            ) : null}
+            <Col md={6}>
+              <div className="text my-2">{props.text}</div>
+            </Col>
+          </Row>
+
           <ButtonGroup size="sm" className="float-right mb-3">
             <DiaryDelete id={props.id} />
             <DiaryEdit id={props.id} />
