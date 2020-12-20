@@ -109,6 +109,16 @@ a.navbar-brand {
   color: #627db2;
 }
 
+.image-upload {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.image {
+  max-width: 250px;
+  max-height: 250px;
+}
+
 @media (max-width: 480px) {
   .create {
     position: inherit;
@@ -118,11 +128,6 @@ a.navbar-brand {
   body {
     font-size: 1rem;
   }
-}
-
-.image-upload {
-  width: 1.3rem;
-  height: 1.3rem;
 }
 
 /* @media (min-width:320px)  { smartphones, portrait iPhone, portrait 480x320 phones (Android) } */

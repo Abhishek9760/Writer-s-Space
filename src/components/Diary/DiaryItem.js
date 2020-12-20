@@ -7,7 +7,7 @@ import Card from "react-bootstrap/Card";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import DiaryDelete from "./DiaryDelete";
 import DiaryEdit from "./DiaryEdit";
-import Image from "react-bootstrap/Image";
+import Figure from "react-bootstrap/Figure";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
@@ -26,7 +26,13 @@ const DiaryItem = (props) => {
           <Row>
             {props.image ? (
               <Col xs={12} sm={6} md={6} lg={6}>
-                <Image className="image" src={props.image} thumbnail></Image>
+                <a href={props.image} target="_blank">
+                  <Figure.Image
+                    className="image"
+                    src={props.image}
+                    thumbnail
+                  ></Figure.Image>
+                </a>
               </Col>
             ) : null}
             <Col md={6}>
