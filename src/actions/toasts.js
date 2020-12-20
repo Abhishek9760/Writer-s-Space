@@ -23,7 +23,7 @@ export const success = (text) =>
   });
 
 export const dark = (text) =>
-  toast.success(text, {
+  toast.dark(text, {
     position: "top-right",
     autoClose: 2000,
     hideProgressBar: false,
