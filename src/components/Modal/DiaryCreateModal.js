@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import Spinner from "react-bootstrap/Spinner";
 
 const diaryCreateModal = ({ title, closeModal, form, btnLoading }) => {
-  console.log(btnLoading);
   return (
     <div className="modal-content">
       <div className="modal-header">

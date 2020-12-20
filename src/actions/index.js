@@ -16,6 +16,7 @@ import {
   EDIT_DIARY,
   LOADING,
 } from "./types";
+import { info, success } from "./toasts";
 import FormData from "form-data";
 
 export const showModal = ({ modalProps, modalType }) => (dispatch) => {
@@ -42,6 +43,7 @@ export const signIn = (formValues) => async (dispatch) => {
   dispatch({ type: SIGN_IN_LOADING, isSignedIn: "loading" });
   try {
     const response = await axios.post("/auth/", { ...formValues });
+    success("Welcome 😀");
     dispatch({ type: SIGN_IN, payload: response.data });
     history.push("/diary");
   } catch (error) {
@@ -163,7 +165,7 @@ export const fetchDiary = (id = null, empty = false) => async (
 
 export const createDiary = (formValues) => async (dispatch, getState) => {
   let token = getState().data.user.token;
-
+  dispatch(hideModal());
   dispatch({ type: LOADING, Loading: true });
   let data = new FormData();
   data.append("title", formValues.title);
@@ -171,6 +173,7 @@ export const createDiary = (formValues) => async (dispatch, getState) => {
     data.append("text", formValues.text);
   }
   if (formValues.image) {
+    info("Uploading Image..");
     data.append("image", formValues.image);
   }
   // for (var pair of data.entries()) {
@@ -183,24 +186,24 @@ export const createDiary = (formValues) => async (dispatch, getState) => {
     },
   });
   if (formValues.image) {
-    dispatch({ type: LOADING, Loading: false });
+    success("Image upload complete.");
   }
+  dispatch({ type: LOADING, Loading: false });
+
   dispatch(fetchDiarys());
-  dispatch(hideModal());
 };
 
 export const deleteDiary = (id) => async (dispatch, getState) => {
   let token = getState().data.user.token;
-
+  dispatch(hideModal());
   dispatch({ type: LOADING, Loading: true });
-
   await axios.delete(`/diary/${id}/`, {
     headers: {
       Authorization: `JWT ${token}`,
     },
   });
+  success("Deleted successfully.");
   dispatch({ type: LOADING, Loading: false });
-  dispatch(hideModal());
   dispatch(fetchDiarys());
   dispatch(fetchDiary(null, true));
 };
@@ -208,22 +211,28 @@ export const deleteDiary = (id) => async (dispatch, getState) => {
 export const editDiary = (id, formValues) => async (dispatch, getState) => {
   let token = getState().data.user.token;
   let data = new FormData();
-  dispatch({ type: LOADING, Loading: true });
+  dispatch(hideModal());
   data.append("title", formValues.title);
   if (formValues.text) {
     data.append("text", formValues.text);
   }
   if (formValues.image && typeof formValues.image !== "string") {
+    info("Uploading Image...");
     data.append("image", formValues.image);
   }
+
+  if (!formValues.text && typeof formValues.image === "string") {
+    return dispatch(hideModal());
+  }
+  dispatch({ type: LOADING, Loading: true });
   const response = await axios.put(`/diary/${id}/`, data, {
     headers: {
       Authorization: `JWT ${token}`,
       "Content-Type": "multipart/form-data",
     },
   });
+  success("Image Upload complete.");
   dispatch({ type: LOADING, Loading: false });
-  dispatch(hideModal());
   const mainUrl = getState().url.url;
   dispatch({ type: EDIT_DIARY, payload: response.data });
   dispatch(fetchDiarys(null, null, mainUrl));

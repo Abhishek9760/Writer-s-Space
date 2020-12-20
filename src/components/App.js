@@ -5,10 +5,13 @@ import history from "../history";
 import Home from "./Home";
 import Register from "./auth/Register";
 import Header from "./Header";
+import { ToastContainer } from "react-toastify";
+
 import DiaryHome from "./Diary/DiaryHome";
 import ModalRoot from "../ModalRoot";
 import { connect } from "react-redux";
 import { hideModal } from "../actions";
+import "react-toastify/dist/ReactToastify.css";
 
 import "../template.css";
 
@@ -24,6 +27,19 @@ const App = (props) => {
         </Router>
       </div>
       <ModalRoot hideModal={props.hideModal} />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      {/* Same as */}
+      <ToastContainer />
     </React.Fragment>
   );
 };
