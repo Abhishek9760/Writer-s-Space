@@ -16,7 +16,7 @@ import {
   EDIT_DIARY,
   LOADING,
 } from "./types";
-import { info, success } from "./toasts";
+import { info, success, dark } from "./toasts";
 import FormData from "form-data";
 
 export const showModal = ({ modalProps, modalType }) => (dispatch) => {
@@ -43,7 +43,7 @@ export const signIn = (formValues) => async (dispatch) => {
   dispatch({ type: SIGN_IN_LOADING, isSignedIn: "loading" });
   try {
     const response = await axios.post("/auth/", { ...formValues });
-    success("Welcome 😀");
+    dark("Welcome 😊");
     dispatch({ type: SIGN_IN, payload: response.data });
     history.push("/diary");
   } catch (error) {
