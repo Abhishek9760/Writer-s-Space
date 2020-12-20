@@ -23,7 +23,6 @@ export default (state = INITIAL_STATE, action) => {
       let { token, isSignedIn, username } = action.payload;
       return { ...state, isSignedIn: isSignedIn, user: { token, username } };
     case SIGN_IN_LOADING:
-      console.log(action);
       return { ...state, isSignedIn: action.isSignedIn };
     default:
       return state;

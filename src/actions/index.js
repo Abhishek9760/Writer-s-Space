@@ -77,6 +77,7 @@ export const saveTokAndUsername = (token, username) => (dispatch) => {
 
 export const signUp = (formValues) => async (dispatch) => {
   const response = await axios.post("/auth/register/", { ...formValues });
+  dark("Registered Successfully.");
   dispatch({ type: SIGN_UP, payload: response.data });
   history.push("/");
 };
