@@ -52,12 +52,16 @@ class DiaryForm extends React.Component {
   }
 }
 
-const validate = (formValues) => {
+const validate = ({ title, text, image }) => {
   const errors = {};
-  if (!formValues.title) {
+  if (!title || title.trim() === "") {
     errors.title = "You must enter a title";
   }
-  if (!formValues.text && !formValues.image) {
+
+  if (text && text.trim() === "") {
+    errors.text = "You must enter a text";
+  }
+  if (!text && !image) {
     errors.text = "You must enter a text or image";
   }
   return errors;

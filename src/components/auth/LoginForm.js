@@ -4,7 +4,9 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 import "./Form.css";
-
+import GoogleLogin from "react-google-login";
+import { googleLogin } from "../../actions";
+import { connect } from "react-redux";
 class LoginForm extends React.Component {
   renderError({ error, touched }) {
     if (touched && error) {
@@ -55,17 +57,24 @@ class LoginForm extends React.Component {
         <Button type="submit" varient="primary" disabled={this.props.disabled}>
           {this.props.btnText}
         </Button>
+        <GoogleLogin
+          clientId="984792856479-vbl9011ikj3ais9375j98f9mlik84v68.apps.googleusercontent.com"
+          buttonText="Login"
+          onSuccess={(res) => this.props.googleLogin(res)}
+          onFailure={(res) => this.props.googleLogin(res)}
+          cookiePolicy={"single_host_origin"}
+        />
       </Form>
     );
   }
 }
 
-const validate = (formValues) => {
+const validate = ({ username, password }) => {
   const errors = {};
-  if (!formValues.username) {
+  if (!username || username.trim() === "") {
     errors.username = "You must enter a username";
   }
-  if (!formValues.password) {
+  if (!password || password.trim() === "") {
     errors.password = "You must enter a password";
   }
   return errors;
@@ -79,8 +88,10 @@ const warn = (values) => {
   return warnings;
 };
 
-export default reduxForm({
-  form: "loginForm",
-  validate: validate,
-  warn: warn,
-})(LoginForm);
+export default connect(null, { googleLogin })(
+  reduxForm({
+    form: "loginForm",
+    validate: validate,
+    warn: warn,
+  })(LoginForm)
+);

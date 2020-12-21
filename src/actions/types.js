@@ -1,6 +1,7 @@
 export const SIGN_IN = "SIGN_IN";
 export const SIGN_IN_LOADING = "SIGN_IN_LOADING";
 export const SEARCH_LOADING = "SEARCH_LOADING";
+export const GOOGLE_LOGIN = "GOOGLE_LOGIN";
 export const LOADING = "LOADING";
 export const SIGN_OUT = "SIGN_OUT";
 export const SIGN_UP = "SIGN_UP";

@@ -1,5 +1,12 @@
 import axios from "../utils/DiaryApi";
 import history from "../history";
+import Cookies from "universal-cookie";
+import {
+  clientID,
+  clientSecret,
+  googleClientID,
+  googleClientSecret,
+} from "./cred";
 import {
   SIGN_IN,
   SIGN_IN_LOADING,
@@ -39,12 +46,42 @@ export const reset = () => (dispatch) => {
   });
 };
 
+export const googleLogin = (response) => async (dispatch) => {
+  axios
+    .post("/auth/convert-token/", {
+      token: response.accessToken,
+      backend: "google-oauth2",
+      grant_type: "convert_token",
+      client_id: googleClientID,
+      client_secret: googleClientSecret,
+    })
+    .then((res) => {
+      const username = response.profileObj.email.split("@")[0];
+      const token = res.data.access_token;
+      const cookies = new Cookies();
+      cookies.set("authtoken", token + "$" + username);
+      return history.push("/diary");
+    })
+    .catch((err) => console.log(err));
+};
+
 export const signIn = (formValues) => async (dispatch) => {
   dispatch({ type: SIGN_IN_LOADING, isSignedIn: "loading" });
   try {
-    const response = await axios.post("/auth/", { ...formValues });
+    const response = await axios.post("/auth/token/", {
+      ...formValues,
+      client_id: clientID,
+      client_secret: clientSecret,
+      grant_type: "password",
+    });
     dark("Welcome 😊");
-    dispatch({ type: SIGN_IN, payload: response.data });
+    dispatch({
+      type: SIGN_IN,
+      payload: {
+        token: response.data.access_token,
+        username: formValues.username,
+      },
+    });
     history.push("/diary");
   } catch (error) {
     dispatch({ type: SIGN_IN_LOADING, isSignedIn: "false" });
@@ -101,7 +138,7 @@ export const searchDiarys = (query) => async (dispatch, getState) => {
     `/user/${username}/diary/?ordering=-timestamp&q=${query}`,
     {
       headers: {
-        Authorization: `JWT ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     }
   );
@@ -131,7 +168,7 @@ export const fetchDiarys = (next = null, prev = null, mainUrl = null) => async (
   dispatch(currentURL(url));
   let response = await axios.get(url, {
     headers: {
-      Authorization: `JWT ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
   let payload = response.data;
@@ -155,7 +192,7 @@ export const fetchDiary = (id = null, empty = false) => async (
   try {
     const response = await axios.get(`/diary/${id}/`, {
       headers: {
-        Authorization: `JWT ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
     dispatch({ type: FETCH_DIARY, payload: response.data });
@@ -182,7 +219,7 @@ export const createDiary = (formValues) => async (dispatch, getState) => {
   // }
   await axios.post("/diary/", data, {
     headers: {
-      Authorization: `JWT ${token}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "multipart/form-data",
     },
   });
@@ -200,7 +237,7 @@ export const deleteDiary = (id) => async (dispatch, getState) => {
   dispatch({ type: LOADING, Loading: true });
   await axios.delete(`/diary/${id}/`, {
     headers: {
-      Authorization: `JWT ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
   success("Deleted successfully.");
@@ -228,7 +265,7 @@ export const editDiary = (id, formValues) => async (dispatch, getState) => {
   dispatch({ type: LOADING, Loading: true });
   const response = await axios.put(`/diary/${id}/`, data, {
     headers: {
-      Authorization: `JWT ${token}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "multipart/form-data",
     },
   });

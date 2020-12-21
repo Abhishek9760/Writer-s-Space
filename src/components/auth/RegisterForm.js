@@ -104,24 +104,24 @@ class RegisterForm extends React.Component {
   }
 }
 
-const validate = (formValues) => {
+const validate = ({ username, email, password, password2 }) => {
   const errors = {};
-  if (!formValues.username) {
+  if (!username || username.trim() === "") {
     errors.username = "You must enter a username";
   }
-  if (!formValues.email) {
+  if (!email) {
     errors.email = "You must enter a email";
   }
-  if (!formValues.password2) {
+  if (!password2 || password2.trim() === "") {
     errors.password2 = "You must enter confirmed password";
   }
-  if (!formValues.password) {
+  if (!password || password.trim() === "") {
     errors.password = "You must enter a password";
   }
-  if (formValues.password && formValues.password.length < 8) {
+  if (password && password.length < 8) {
     errors.password = "Password must be greater than 8.";
   }
-  if (formValues.password != formValues.password2) {
+  if (password != password2) {
     errors.password = "Passwords must match";
   }
   return errors;
