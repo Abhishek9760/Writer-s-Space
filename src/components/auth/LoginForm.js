@@ -57,13 +57,15 @@ class LoginForm extends React.Component {
         <Button type="submit" varient="primary" disabled={this.props.disabled}>
           {this.props.btnText}
         </Button>
-        <GoogleLogin
-          clientId="984792856479-vbl9011ikj3ais9375j98f9mlik84v68.apps.googleusercontent.com"
-          buttonText="Login"
-          onSuccess={(res) => this.props.googleLogin(res)}
-          onFailure={(res) => this.props.googleLogin(res)}
-          cookiePolicy={"single_host_origin"}
-        />
+        <div>
+          <GoogleLogin
+            clientId="984792856479-vbl9011ikj3ais9375j98f9mlik84v68.apps.googleusercontent.com"
+            buttonText="Login"
+            onSuccess={(res) => this.props.googleLogin(res)}
+            onFailure={(res) => this.props.googleLogin(res)}
+            cookiePolicy={"single_host_origin"}
+          />
+        </div>
       </Form>
     );
   }
