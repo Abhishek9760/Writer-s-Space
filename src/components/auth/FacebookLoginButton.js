@@ -12,7 +12,8 @@ const FacebookLoginButton = (props) => {
       appId="3375293559265744"
       fields="name,email,picture"
       disableMobileRedirect={true}
-      redirectUri="/diary/"
+      redirectUri="https://laughing-bose-a55b10.netlify.app/diary/"
+      cookie
       isMobile={false}
       render={(renderProps) => (
         <button
