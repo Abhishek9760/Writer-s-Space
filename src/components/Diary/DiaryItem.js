@@ -44,6 +44,7 @@ const DiaryItem = (props) => {
                   href={props.image}
                   style={loaded ? {} : { display: "none" }}
                   target="_blank"
+                  rel="noreferrer"
                 >
                   <Figure.Image
                     className="image"
