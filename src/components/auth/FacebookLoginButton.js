@@ -13,7 +13,7 @@ const FacebookLoginButton = (props) => {
       fields="name,email,picture"
       disableMobileRedirect={true}
       redirectUri="https://laughing-bose-a55b10.netlify.app"
-      // isMobile={false}
+      isMobile={false}
       render={(renderProps) => (
         <button
           className="google-button btn-block"
