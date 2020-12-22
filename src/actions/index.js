@@ -61,12 +61,15 @@ export const googleLogin = (response) => async (dispatch) => {
       const token = res.data.access_token;
       const cookies = new Cookies();
       cookies.set("authtoken", token + "$" + username);
+      dark("Welcome 😊");
       dispatch({ type: SIGN_IN_LOADING, isSignedIn: false });
       return history.push("/diary");
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      dark("Some error occured");
+      dispatch({ type: SIGN_IN_LOADING, isSignedIn: false });
+    });
 };
-
 export const signIn = (formValues) => async (dispatch) => {
   dispatch({ type: SIGN_IN_LOADING, isSignedIn: "loading" });
   try {
