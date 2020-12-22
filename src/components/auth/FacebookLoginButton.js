@@ -44,6 +44,7 @@ const FacebookLoginButton = (props) => {
     <FacebookLogin
       appId="3375293559265744"
       fields="name,email,picture"
+      disableMobileRedirect={true}
       render={(renderProps) => (
         <button
           className="google-button btn-block"
