@@ -119,6 +119,19 @@ a.navbar-brand {
   max-height: 250px;
 }
 
+.line {
+  width: 100%;
+  border-bottom: 1px solid black;
+  margin: 4rem 0 3rem;
+  text-align: center;
+  font-weight: 100;
+  border-bottom-style: outset;
+}
+
+.btn {
+  font-weight: 100;
+}
+
 @media (max-width: 480px) {
   .create {
     position: inherit;

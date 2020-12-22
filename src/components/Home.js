@@ -1,6 +1,5 @@
 import React from "react";
 import Login from "./auth/Login";
-import { Link } from "react-router-dom";
 import { useSpring, animated } from "react-spring";
 
 const Home = () => {
@@ -12,12 +11,6 @@ const Home = () => {
   return (
     <animated.div style={styleProps}>
       <Login />
-      <p className="my-2">
-        Not a user?{" "}
-        <Link to="/register" className="link">
-          Sign up
-        </Link>
-      </p>
     </animated.div>
   );
 };

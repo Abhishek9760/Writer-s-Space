@@ -4,7 +4,9 @@ import Spinner from "react-bootstrap/Spinner";
 import { signIn } from "../../actions";
 import { connect } from "react-redux";
 import { withCookies } from "react-cookie";
+import { Link } from "react-router-dom";
 import history from "../../history";
+import GoogleLoginButton from "./GoogleLoginButton";
 
 import { showModal, hideModal } from "../../actions";
 
@@ -47,25 +49,39 @@ class Login extends React.Component {
   0;
   render() {
     return (
-      <div>
-        <h1 className="mb-3">Login</h1>
-        <LoginForm
-          onSubmit={this.onSubmit}
-          btnText={
-            this.props.isSignedIn === "loading" ? (
-              <Spinner
-                as="span"
-                animation="border"
-                size="sm"
-                role="status"
-                aria-hidden="true"
-              />
-            ) : (
-              "Login"
-            )
-          }
-          disabled={this.props.isSignedIn === "loading" ? true : false}
-        />
+      <div className="row justify-content-md-center">
+        <div className="col-md-8">
+          <h1 className="mb-5" style={{ fontWeight: "100" }}>
+            Login
+          </h1>
+          <GoogleLoginButton />
+
+          <div className="line">Or</div>
+
+          <LoginForm
+            onSubmit={this.onSubmit}
+            btnText={
+              this.props.isSignedIn === "loading" ? (
+                <Spinner
+                  as="span"
+                  animation="border"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                />
+              ) : (
+                "Login"
+              )
+            }
+            disabled={this.props.isSignedIn === "loading" ? true : false}
+          />
+          <p className="my-2">
+            Not a user?{" "}
+            <Link to="/register" className="link">
+              Sign up
+            </Link>
+          </p>
+        </div>
       </div>
     );
   }

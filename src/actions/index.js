@@ -47,6 +47,7 @@ export const reset = () => (dispatch) => {
 };
 
 export const googleLogin = (response) => async (dispatch) => {
+  dispatch({ type: SIGN_IN_LOADING, isSignedIn: "loading" });
   axios
     .post("/auth/convert-token/", {
       token: response.accessToken,
@@ -60,6 +61,7 @@ export const googleLogin = (response) => async (dispatch) => {
       const token = res.data.access_token;
       const cookies = new Cookies();
       cookies.set("authtoken", token + "$" + username);
+      dispatch({ type: SIGN_IN_LOADING, isSignedIn: false });
       return history.push("/diary");
     })
     .catch((err) => console.log(err));
@@ -84,7 +86,7 @@ export const signIn = (formValues) => async (dispatch) => {
     });
     history.push("/diary");
   } catch (error) {
-    dispatch({ type: SIGN_IN_LOADING, isSignedIn: "false" });
+    dispatch({ type: SIGN_IN_LOADING, isSignedIn: false });
     if (error.response.status == 401) {
       dispatch(
         showModal({

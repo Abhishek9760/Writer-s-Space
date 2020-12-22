@@ -36,17 +36,23 @@ class Register extends React.Component {
       >
         {(props) => (
           <div style={props}>
-            <h1 className="mb-3">Register</h1>
-            <RegisterForm
-              onSubmit={this.onSubmit}
-              btnText={this.state.btnText}
-            />
-            <p className="my-2">
-              Already a user?{" "}
-              <Link to="/" className="link">
-                login
-              </Link>
-            </p>
+            <div className="row justify-content-md-center">
+              <div className="col-md-6">
+                <h1 className="mb-5" style={{ fontWeight: "100" }}>
+                  Register
+                </h1>
+                <RegisterForm
+                  onSubmit={this.onSubmit}
+                  btnText={this.state.btnText}
+                />
+                <p className="my-2">
+                  Already a user?{" "}
+                  <Link to="/" className="link">
+                    login
+                  </Link>
+                </p>
+              </div>
+            </div>
           </div>
         )}
       </Spring>
