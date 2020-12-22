@@ -1,7 +1,7 @@
 import React from "react";
 
 import { facebookLogin } from "../../actions";
-import { FacebookLogin } from "react-facebook-login-component";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import { connect } from "react-redux";
 import "./GoogleLoginButton.css";
 import Spinner from "react-bootstrap/Spinner";
@@ -12,7 +12,8 @@ const FacebookLoginButton = (props) => {
       appId="3375293559265744"
       fields="name,email,picture"
       disableMobileRedirect={true}
-      redirectUri="https://laughing-bose-a55b10.netlify.app/diary/"
+      redirectUri="https://laughing-bose-a55b10.netlify.app"
+      // isMobile={false}
       render={(renderProps) => (
         <button
           className="google-button btn-block"
