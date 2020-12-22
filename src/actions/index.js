@@ -52,7 +52,7 @@ export const reset = () => (dispatch) => {
 
 export const facebookLogin = (response) => async (dispatch) => {
   dispatch({ type: FACEBOOK_LOGIN_LOADING, facebookLoading: true });
-
+  console.log("logging...");
   axios
     .post("/auth/convert-token/", {
       token: response.accessToken,
@@ -62,6 +62,7 @@ export const facebookLogin = (response) => async (dispatch) => {
       client_secret: facebookClientSecret,
     })
     .then((res) => {
+      console.log(res);
       dispatch({ type: FACEBOOK_LOGIN_LOADING, facebookLoading: false });
       const cookies = new Cookies();
       const token = res.data.access_token;
@@ -69,6 +70,7 @@ export const facebookLogin = (response) => async (dispatch) => {
       cookies.set("authtoken", token + "$" + username);
       dark("Welcome 😊");
       dispatch({ type: LOADING, Loading: false });
+      console.log("redirecting..");
       return history.push("/diary");
     })
     .catch((err) => {
