@@ -12,6 +12,7 @@ const FacebookLoginButton = (props) => {
       appId="3375293559265744"
       fields="name,email,picture"
       disableMobileRedirect={true}
+      redirectUri="/diary/"
       isMobile={false}
       render={(renderProps) => (
         <button
