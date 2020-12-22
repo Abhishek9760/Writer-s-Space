@@ -87,6 +87,7 @@ export const googleLogin = (response) => async (dispatch) => {
       client_secret: googleClientSecret,
     })
     .then((res) => {
+      console.log(res);
       const username = response.profileObj.email.split("@")[0];
       const token = res.data.access_token;
       const cookies = new Cookies();

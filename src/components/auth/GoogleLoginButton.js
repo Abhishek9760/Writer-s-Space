@@ -6,6 +6,10 @@ import { connect } from "react-redux";
 import "./GoogleLoginButton.css";
 import Spinner from "react-bootstrap/Spinner";
 
+const googleLoginFailure = (res) => {
+  console.log(res);
+};
+
 const GoogleLoginButton = (props) => {
   return (
     <GoogleLogin
@@ -34,8 +38,8 @@ const GoogleLoginButton = (props) => {
           <span className="google-button__text">Sign in with Google</span>
         </button>
       )}
-      onSuccess={(res) => props.googleLogin}
-      onFailure={(res) => props.googleLogin}
+      onSuccess={(res) => props.googleLogin(res)}
+      onFailure={googleLoginFailure}
       cookiePolicy={"single_host_origin"}
     />
   );
