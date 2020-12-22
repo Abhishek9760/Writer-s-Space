@@ -7,6 +7,7 @@ import { withCookies } from "react-cookie";
 import { Link } from "react-router-dom";
 import history from "../../history";
 import GoogleLoginButton from "./GoogleLoginButton";
+import FacebookLoginButton from "./FacebookLoginButton";
 
 import { showModal, hideModal } from "../../actions";
 
@@ -55,6 +56,7 @@ class Login extends React.Component {
             Login
           </h1>
           <GoogleLoginButton />
+          <FacebookLoginButton />
 
           <div className="line">Or</div>
 

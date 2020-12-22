@@ -6,6 +6,8 @@ import {
   clientSecret,
   googleClientID,
   googleClientSecret,
+  facebookClientID,
+  facebookClientSecret,
 } from "./cred";
 import {
   SIGN_IN,
@@ -22,6 +24,8 @@ import {
   RESET,
   EDIT_DIARY,
   LOADING,
+  GOOGLE_LOGIN_LOADING,
+  FACEBOOK_LOGIN_LOADING,
 } from "./types";
 import { info, success, dark } from "./toasts";
 import FormData from "form-data";
@@ -46,8 +50,34 @@ export const reset = () => (dispatch) => {
   });
 };
 
+export const facebookLogin = (response) => async (dispatch) => {
+  dispatch({ type: FACEBOOK_LOGIN_LOADING, facebookLoading: true });
+
+  axios
+    .post("/auth/convert-token/", {
+      token: response.accessToken,
+      backend: "facebook",
+      grant_type: "convert_token",
+      client_id: facebookClientID,
+      client_secret: facebookClientSecret,
+    })
+    .then((res) => {
+      dispatch({ type: FACEBOOK_LOGIN_LOADING, facebookLoading: false });
+      const cookies = new Cookies();
+      const token = res.data.access_token;
+      const username = response.name.replaceAll(" ", "");
+      cookies.set("authtoken", token + "$" + username);
+      dark("Welcome 😊");
+      dispatch({ type: LOADING, Loading: false });
+      return history.push("/diary");
+    })
+    .catch((err) => {
+      dispatch({ type: FACEBOOK_LOGIN_LOADING, facebookLoading: false });
+    });
+};
+
 export const googleLogin = (response) => async (dispatch) => {
-  dispatch({ type: LOADING, Loading: true });
+  dispatch({ type: GOOGLE_LOGIN_LOADING, googleLoading: true });
   axios
     .post("/auth/convert-token/", {
       token: response.accessToken,
@@ -62,12 +92,12 @@ export const googleLogin = (response) => async (dispatch) => {
       const cookies = new Cookies();
       cookies.set("authtoken", token + "$" + username);
       dark("Welcome 😊");
-      dispatch({ type: LOADING, Loading: false });
+      dispatch({ type: GOOGLE_LOGIN_LOADING, googleLoading: false });
       return history.push("/diary");
     })
     .catch((err) => {
       dark("Some error occured");
-      dispatch({ type: LOADING, Loading: false });
+      dispatch({ type: GOOGLE_LOGIN_LOADING, googleLoading: false });
     });
 };
 export const signIn = (formValues) => async (dispatch) => {
@@ -90,7 +120,7 @@ export const signIn = (formValues) => async (dispatch) => {
     history.push("/diary");
   } catch (error) {
     dispatch({ type: SIGN_IN_LOADING, isSignedIn: false });
-    if (error.response.status == 400) {
+    if (error.response.status === 400) {
       dispatch(
         showModal({
           modalProps: {

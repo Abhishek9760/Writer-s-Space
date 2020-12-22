@@ -34,8 +34,8 @@ const GoogleLoginButton = (props) => {
           <span className="google-button__text">Sign in with Google</span>
         </button>
       )}
-      onSuccess={(res) => props.googleLogin(res)}
-      onFailure={(res) => props.googleLogin(res)}
+      onSuccess={(res) => props.googleLogin}
+      onFailure={(res) => props.googleLogin}
       cookiePolicy={"single_host_origin"}
     />
   );

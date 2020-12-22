@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 
 import authReducer from "./authReducer";
 import diaryReducer from "./diaryReducer";
+import loaderReducer from "./loaderReducer";
 import modalReducer from "./modalReducer";
 import { reducer as formReducer } from "redux-form";
 import currentURLReducer from "./currentURLReducer";
@@ -13,6 +14,7 @@ const appReducer = combineReducers({
   diaries: diaryReducer,
   modal: modalReducer,
   url: currentURLReducer,
+  loading: loaderReducer,
 });
 
 export default (state, action) => {
