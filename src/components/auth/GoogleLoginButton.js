@@ -15,6 +15,7 @@ const GoogleLoginButton = (props) => {
     <GoogleLogin
       clientId="984792856479-vbl9011ikj3ais9375j98f9mlik84v68.apps.googleusercontent.com"
       buttonText="Login"
+      className="mb-3"
       render={(renderProps) => (
         <button
           className="google-button btn-block"
@@ -45,8 +46,8 @@ const GoogleLoginButton = (props) => {
   );
 };
 
-const mapStateToProps = ({ diaries: { Loading } }) => {
-  return { btnLoading: Loading };
+const mapStateToProps = ({ loading: { googleLoading } }) => {
+  return { btnLoading: googleLoading };
 };
 
 export default connect(mapStateToProps, { googleLogin })(GoogleLoginButton);
