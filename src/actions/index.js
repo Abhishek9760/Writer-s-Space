@@ -62,19 +62,11 @@ export const facebookLogin = (response) => async (dispatch) => {
       client_secret: facebookClientSecret,
     })
     .then((res) => {
-      console.log(res);
       dispatch({ type: FACEBOOK_LOGIN_LOADING, facebookLoading: false });
-      console.log("loading off..");
       const cookies = new Cookies();
-      console.log("cookies initili..");
-
       const token = res.data.access_token;
-      console.log(token);
       const username = response.name.replaceAll(" ", "");
-      console.log(username);
       cookies.set("authtoken", token + "$" + username);
-      console.log("cookies seted");
-
       dark("Welcome 😊");
       dispatch({ type: LOADING, Loading: false });
       console.log("redirecting..");

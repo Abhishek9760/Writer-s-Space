@@ -56,7 +56,7 @@ class Login extends React.Component {
             Login
           </h1>
           <GoogleLoginButton />
-          <FacebookLoginButton />
+          {/* <FacebookLoginButton /> */}
 
           <div className="line">Or</div>
 
