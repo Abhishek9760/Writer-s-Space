@@ -47,7 +47,7 @@ export const reset = () => (dispatch) => {
 };
 
 export const googleLogin = (response) => async (dispatch) => {
-  dispatch({ type: SIGN_IN_LOADING, isSignedIn: "loading" });
+  dispatch({ type: LOADING, Loading: true });
   axios
     .post("/auth/convert-token/", {
       token: response.accessToken,
@@ -62,12 +62,12 @@ export const googleLogin = (response) => async (dispatch) => {
       const cookies = new Cookies();
       cookies.set("authtoken", token + "$" + username);
       dark("Welcome 😊");
-      dispatch({ type: SIGN_IN_LOADING, isSignedIn: false });
+      dispatch({ type: LOADING, Loading: false });
       return history.push("/diary");
     })
     .catch((err) => {
       dark("Some error occured");
-      dispatch({ type: SIGN_IN_LOADING, isSignedIn: false });
+      dispatch({ type: LOADING, Loading: false });
     });
 };
 export const signIn = (formValues) => async (dispatch) => {
@@ -90,7 +90,7 @@ export const signIn = (formValues) => async (dispatch) => {
     history.push("/diary");
   } catch (error) {
     dispatch({ type: SIGN_IN_LOADING, isSignedIn: false });
-    if (error.response.status == 401) {
+    if (error.response.status == 400) {
       dispatch(
         showModal({
           modalProps: {

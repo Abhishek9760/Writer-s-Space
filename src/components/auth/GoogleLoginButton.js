@@ -18,7 +18,7 @@ const GoogleLoginButton = (props) => {
           disabled={renderProps.disabled}
         >
           <span className="google-button__icon">
-            {props.isSignedIn === "loading" ? (
+            {props.btnLoading ? (
               <Spinner
                 style={{ display: "block" }}
                 as="span"
@@ -41,8 +41,8 @@ const GoogleLoginButton = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return { isSignedIn: state.data.isSignedIn };
+const mapStateToProps = ({ diaries: { Loading } }) => {
+  return { btnLoading: Loading };
 };
 
 export default connect(mapStateToProps, { googleLogin })(GoogleLoginButton);
