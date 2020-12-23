@@ -275,7 +275,7 @@ export const createDiary = (formValues) => async (dispatch, getState) => {
     })
     .then(() => {
       if (toastId) {
-        toast.done(toast);
+        toast.done(toastId);
       }
       if (formValues.image) {
         success("Image upload complete.");
@@ -335,7 +335,7 @@ export const editDiary = (id, formValues) => async (dispatch, getState) => {
     },
   });
   if (toastId) {
-    toast.done(toast);
+    toast.done(toastId);
   }
   success("Saved");
   dispatch({ type: LOADING, Loading: false });
