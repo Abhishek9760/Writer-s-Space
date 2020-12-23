@@ -25,15 +25,12 @@ class Login extends React.Component {
   };
 
   componentDidMount() {
+    document.getElementsByTagName("body")[0].classList.add("gradient");
+    document.getElementsByTagName("body")[0].classList.remove("list");
     if (this.props.cookies.get("authtoken")) {
       console.log("redirecting..");
       history.push("/diary");
     }
-  }
-
-  componentWillMount() {
-    document.getElementsByTagName("body")[0].classList.add("gradient");
-    document.getElementsByTagName("body")[0].classList.remove("list");
   }
   closeModal = () => {
     this.props.hideModal();
@@ -56,7 +53,7 @@ class Login extends React.Component {
             Login
           </h1>
           <GoogleLoginButton />
-          {/* <FacebookLoginButton /> */}
+          <FacebookLoginButton />
 
           <div className="line">Or</div>
 

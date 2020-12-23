@@ -6,6 +6,7 @@ import Home from "./Home";
 import Register from "./auth/Register";
 import Header from "./Header";
 import { ToastContainer } from "react-toastify";
+import CookieConsent from "react-cookie-consent";
 
 import DiaryHome from "./Diary/DiaryHome";
 import ModalRoot from "../ModalRoot";
@@ -40,6 +41,20 @@ const App = (props) => {
       />
       {/* Same as */}
       <ToastContainer />
+      <CookieConsent
+        location="bottom"
+        buttonText="Sure"
+        cookieName="cookiesAllowed"
+        style={{
+          background: "rgba(0, 0, 0, 0.51)",
+          fontSize: "1rem",
+          fontWeight: "300",
+        }}
+        buttonStyle={{ color: "#4e503b", fontSize: "1rem" }}
+        expires={150}
+      >
+        This website uses cookies to enhance the user experience.
+      </CookieConsent>
     </React.Fragment>
   );
 };

@@ -3,7 +3,7 @@ const initialState = {
   url: null,
 };
 
-export default (state = initialState, action) => {
+const currentURLReducer = (state = initialState, action) => {
   switch (action.type) {
     case CURRENT_URL:
       return { url: action.payload };
@@ -11,3 +11,5 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+
+export default currentURLReducer;

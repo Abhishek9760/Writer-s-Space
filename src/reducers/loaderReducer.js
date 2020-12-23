@@ -4,7 +4,7 @@ const initialState = {
   facebookLoading: false,
 };
 
-export default (state = initialState, action) => {
+const loaderReducer = (state = initialState, action) => {
   switch (action.type) {
     case GOOGLE_LOGIN_LOADING:
       return { ...state, googleLoading: action.googleLoading };
@@ -14,3 +14,5 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+
+export default loaderReducer;

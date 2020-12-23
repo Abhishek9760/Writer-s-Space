@@ -43,7 +43,7 @@ class DiaryForm extends React.Component {
       <Form id="diary-form" onSubmit={this.props.handleSubmit(this.onSubmit)}>
         <Field name="title" component={this.renderInput} label="Enter title" />
         <Field name="text" component={this.renderInput} label="Enter text" />
-        <Field name="image" component={FieldFileInput} name="image" />
+        <Field name="image" component={FieldFileInput} />
         <Alert className="small" variant="info">
           Image of size > 1MB will take much time to upload.
         </Alert>

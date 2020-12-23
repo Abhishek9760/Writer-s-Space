@@ -32,7 +32,10 @@ const GoogleLoginButton = (props) => {
                 aria-hidden="true"
               />
             ) : (
-              <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" />
+              <img
+                alt="google logo"
+                src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+              />
             )}
           </span>
           <span className="google-button__text">Sign in with Google</span>

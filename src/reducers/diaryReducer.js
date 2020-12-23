@@ -21,7 +21,7 @@ const INITIAL_STATE = {
   Loading: false,
 };
 
-export default (state = INITIAL_STATE, action) => {
+const diaryReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case FETCH_DIARYS:
       action.payload.results = _.map(action.payload.results, (item) => {
@@ -56,3 +56,5 @@ export default (state = INITIAL_STATE, action) => {
       return state;
   }
 };
+
+export default diaryReducer;

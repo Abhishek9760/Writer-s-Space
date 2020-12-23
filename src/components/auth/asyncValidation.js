@@ -9,14 +9,14 @@ const asyncValidate = (values /*, dispatch */) => {
     );
     let data = response.data;
     if (data.username && data.email) {
-      throw {
+      throw new {
         username: "username already taken",
         email: "email already exists",
-      };
+      }();
     } else if (response.data.username) {
-      throw { username: "username already taken" };
+      throw new { username: "username already taken" }();
     } else if (response.data.email) {
-      throw { email: "already taken" };
+      throw new { email: "already taken" }();
     }
   });
 };

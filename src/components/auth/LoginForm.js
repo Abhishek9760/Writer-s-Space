@@ -26,7 +26,7 @@ class LoginForm extends React.Component {
         <Form.Control
           type={type}
           autoComplete="off"
-          placeholder={`${type == "text" ? "username" : type}`}
+          placeholder={`${type === "text" ? "username" : type}`}
           className={classes}
           {...input}
         />

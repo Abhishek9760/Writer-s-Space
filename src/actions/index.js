@@ -111,6 +111,7 @@ export const signIn = (formValues) => async (dispatch) => {
       client_secret: clientSecret,
       grant_type: "password",
     });
+    console.log(response);
     dark("Welcome 😊");
     dispatch({
       type: SIGN_IN,

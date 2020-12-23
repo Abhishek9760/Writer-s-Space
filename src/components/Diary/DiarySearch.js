@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import DiarySearchForm from "./Forms/DiarySearchForm";
 import { connect } from "react-redux";
 import { searchDiarys } from "../../actions";

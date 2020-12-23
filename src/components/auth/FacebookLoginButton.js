@@ -31,7 +31,10 @@ const FacebookLoginButton = (props) => {
                 aria-hidden="true"
               />
             ) : (
-              <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Facebook_circle_pictogram.svg" />
+              <img
+                alt="fb logo"
+                src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Facebook_circle_pictogram.svg"
+              />
             )}
           </span>
           <span className="google-button__text">Sign in with Facebook</span>

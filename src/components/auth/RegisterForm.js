@@ -38,7 +38,7 @@ class RegisterForm extends React.Component {
         <Form.Control
           type={type}
           autoComplete="off"
-          placeholder={`${type == "text" ? "username" : type}`}
+          placeholder={`${type === "text" ? "username" : type}`}
           className={classes}
           {...input}
         />
@@ -121,7 +121,7 @@ const validate = ({ username, email, password, password2 }) => {
   if (password && password.length < 8) {
     errors.password = "Password must be greater than 8.";
   }
-  if (password != password2) {
+  if (password !== password2) {
     errors.password = "Passwords must match";
   }
   return errors;

@@ -17,10 +17,12 @@ const appReducer = combineReducers({
   loading: loaderReducer,
 });
 
-export default (state, action) => {
+const rootReducer = (state, action) => {
   if (action.type === RESET) {
     state = undefined;
   }
 
   return appReducer(state, action);
 };
+
+export default rootReducer;
