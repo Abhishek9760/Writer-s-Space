@@ -88,10 +88,11 @@ export const googleLogin = (response) => async (dispatch) => {
       client_secret: googleClientSecret,
     })
     .then((res) => {
-      console.log(res);
       const username = response.profileObj.email.split("@")[0];
       const token = res.data.access_token;
+      console.log("setting cookies..");
       const cookies = new Cookies();
+      console.log(cookies);
       cookies.set("authtoken", token + "$" + username);
       dark("Welcome 😊");
       dispatch({ type: GOOGLE_LOGIN_LOADING, googleLoading: false });
@@ -111,7 +112,6 @@ export const signIn = (formValues) => async (dispatch) => {
       client_secret: clientSecret,
       grant_type: "password",
     });
-    console.log(response);
     dark("Welcome 😊");
     dispatch({
       type: SIGN_IN,
