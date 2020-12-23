@@ -1,6 +1,6 @@
 import React from "react";
 
-import { facebookLogin } from "../../actions";
+import { facebookLogin } from "../../../actions";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import { connect } from "react-redux";
 import "./GoogleLoginButton.css";

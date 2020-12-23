@@ -1,6 +1,6 @@
 import React from "react";
 
-import { googleLogin } from "../../actions";
+import { googleLogin } from "../../../actions";
 import GoogleLogin from "react-google-login";
 import { connect } from "react-redux";
 import "./GoogleLoginButton.css";

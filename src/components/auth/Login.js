@@ -6,8 +6,8 @@ import { connect } from "react-redux";
 import { withCookies } from "react-cookie";
 import { Link } from "react-router-dom";
 import history from "../../history";
-import GoogleLoginButton from "./GoogleLoginButton";
-import FacebookLoginButton from "./FacebookLoginButton";
+import GoogleLoginButton from "./OAuth/GoogleLoginButton";
+import FacebookLoginButton from "./OAuth/FacebookLoginButton";
 
 import { showModal, hideModal } from "../../actions";
 

@@ -1,5 +1,6 @@
 import axios from "../utils/DiaryApi";
 import history from "../history";
+import { toast } from "react-toastify";
 import Cookies from "universal-cookie";
 import {
   clientID,
@@ -249,24 +250,37 @@ export const createDiary = (formValues) => async (dispatch, getState) => {
     data.append("text", formValues.text);
   }
   if (formValues.image) {
-    info("Uploading Image..");
     data.append("image", formValues.image);
   }
   // for (var pair of data.entries()) {
   //   console.log(pair[0] + ", " + pair[1]);
   // }
-  await axios.post("/diary/", data, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "multipart/form-data",
-    },
-  });
-  if (formValues.image) {
-    success("Image upload complete.");
-  }
-  dispatch({ type: LOADING, Loading: false });
+  let toastId = null;
 
-  dispatch(fetchDiarys());
+  axios
+    .post("/diary/", data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+      onUploadProgress: (progressEvent) => {
+        const { loaded, total } = progressEvent;
+        let progress = loaded / total;
+        if (toastId === null) {
+          toastId = toast.info("uploading..", { progress: progress });
+        } else {
+          toast.update(toastId, { progress: progress });
+        }
+      },
+    })
+    .then(() => {
+      if (formValues.image) {
+        success("Image upload complete.");
+      }
+      dispatch({ type: LOADING, Loading: false });
+
+      dispatch(fetchDiarys());
+    });
 };
 
 export const deleteDiary = (id) => async (dispatch, getState) => {
@@ -293,7 +307,6 @@ export const editDiary = (id, formValues) => async (dispatch, getState) => {
     data.append("text", formValues.text);
   }
   if (formValues.image && typeof formValues.image !== "string") {
-    info("Uploading Image...");
     data.append("image", formValues.image);
   }
 
@@ -301,13 +314,24 @@ export const editDiary = (id, formValues) => async (dispatch, getState) => {
     return dispatch(hideModal());
   }
   dispatch({ type: LOADING, Loading: true });
+  let toastId = null;
+
   const response = await axios.put(`/diary/${id}/`, data, {
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "multipart/form-data",
     },
+    onUploadProgress: (progressEvent) => {
+      const { loaded, total } = progressEvent;
+      let progress = loaded / total;
+      if (toastId === null) {
+        toastId = toast.info("saving...", { progress: progress });
+      } else {
+        toast.update(toastId, { progress: progress });
+      }
+    },
   });
-  success("Image Upload complete.");
+  success("Saved");
   dispatch({ type: LOADING, Loading: false });
   const mainUrl = getState().url.url;
   dispatch({ type: EDIT_DIARY, payload: response.data });
