@@ -56,7 +56,7 @@ export const reset = () => (dispatch) => {
 
 export const facebookLogin = (response) => async (dispatch) => {
   dispatch({ type: FACEBOOK_LOGIN_LOADING, facebookLoading: true });
-  console.log("logging...");
+  console.log("loading facebook..");
   axios
     .post("/auth/convert-token/", {
       token: response.accessToken,
@@ -66,7 +66,7 @@ export const facebookLogin = (response) => async (dispatch) => {
       client_secret: facebookClientSecret,
     })
     .then((res) => {
-      dispatch({ type: FACEBOOK_LOGIN_LOADING, facebookLoading: false });
+      dispatch({ type: FACEBOOK_LOGIN_LOADING, loading: false });
       const cookies = new Cookies();
       const token = res.data.access_token;
       const username = response.name.replaceAll(" ", "");
@@ -76,12 +76,12 @@ export const facebookLogin = (response) => async (dispatch) => {
       return history.push("/diary");
     })
     .catch((err) => {
-      dispatch({ type: FACEBOOK_LOGIN_LOADING, facebookLoading: false });
+      dispatch({ type: FACEBOOK_LOGIN_LOADING, loading: false });
     });
 };
 
 export const googleLogin = (response) => async (dispatch) => {
-  dispatch({ type: GOOGLE_LOGIN_LOADING, googleLoading: true });
+  dispatch({ type: GOOGLE_LOGIN_LOADING, loading: true });
   axios
     .post("/auth/convert-token/", {
       token: response.accessToken,
@@ -98,12 +98,12 @@ export const googleLogin = (response) => async (dispatch) => {
       console.log(cookies);
       cookies.set("authtoken", token + "$" + username);
       dark("Welcome 😊");
-      dispatch({ type: GOOGLE_LOGIN_LOADING, googleLoading: false });
+      dispatch({ type: GOOGLE_LOGIN_LOADING, loading: false });
       return history.push("/diary");
     })
     .catch((err) => {
       dark("Some error occured");
-      dispatch({ type: GOOGLE_LOGIN_LOADING, googleLoading: false });
+      dispatch({ type: GOOGLE_LOGIN_LOADING, loading: false });
     });
 };
 export const signIn = (formValues) => async (dispatch) => {
