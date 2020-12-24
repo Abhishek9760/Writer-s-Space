@@ -55,7 +55,7 @@ export const reset = () => (dispatch) => {
 };
 
 export const facebookLogin = (response) => async (dispatch) => {
-  dispatch({ type: FACEBOOK_LOGIN_LOADING, facebookLoading: true });
+  dispatch({ type: FACEBOOK_LOGIN_LOADING, loading: true });
   console.log("loading facebook..");
   axios
     .post("/auth/convert-token/", {
