@@ -24,6 +24,4 @@ yarn-error.log*
 
 .eslintcache*
 .vscode*
-/src/constants
-/public/_redirects
 /public/manifest.json
