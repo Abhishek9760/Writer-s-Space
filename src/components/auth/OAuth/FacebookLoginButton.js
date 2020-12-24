@@ -18,7 +18,7 @@ const FacebookLoginButton = (props) => {
         <button
           className="google-button btn-block"
           onClick={renderProps.onClick}
-          disabled={renderProps.disabled}
+          disabled={props.btnLoading}
         >
           <span className="google-button__icon">
             {props.btnLoading ? (

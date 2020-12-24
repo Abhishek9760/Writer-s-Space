@@ -19,7 +19,7 @@ const GoogleLoginButton = (props) => {
         <button
           className="google-button btn-block mb-3"
           onClick={renderProps.onClick}
-          disabled={renderProps.disabled}
+          disabled={props.btnLoading}
         >
           <span className="google-button__icon">
             {props.btnLoading ? (

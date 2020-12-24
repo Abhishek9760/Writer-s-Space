@@ -65,9 +65,9 @@ class Login extends React.Component {
           <FacebookLoginButton />
 
           <div className="line">
-            <span class="line-right"></span>
-            <span class="line-text">Or</span>
-            <span class="line-left"></span>
+            <span className="line-right"></span>
+            <span className="line-text">Or</span>
+            <span className="line-left"></span>
           </div>
 
           <LoginForm
