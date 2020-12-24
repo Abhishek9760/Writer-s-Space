@@ -44,17 +44,8 @@ class Login extends React.Component {
       this.props.cookies.set("authtoken", tokenName);
     }
   }
-
-  shouldComponentUpdate(nextProps) {
-    if (this.props.user === null) {
-      return false;
-    }
-    if (this.props.loading !== nextProps.loading) {
-      return false;
-    }
-    return true;
-  }
   render() {
+    console.log(this.props.loading);
     return (
       <div className="row justify-content-md-center">
         <div className="col-md-8">

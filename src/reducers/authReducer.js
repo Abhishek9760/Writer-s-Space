@@ -1,10 +1,4 @@
-import {
-  SIGN_IN,
-  SIGN_OUT,
-  SIGN_UP,
-  TOK_USERNAME,
-  SIGN_IN_LOADING,
-} from "../actions/types";
+import { SIGN_IN, SIGN_OUT, SIGN_UP, TOK_USERNAME } from "../actions/types";
 
 const INITIAL_STATE = {
   isSignedIn: false,
@@ -22,8 +16,6 @@ const authReducer = (state = INITIAL_STATE, action) => {
     case TOK_USERNAME:
       let { token, isSignedIn, username } = action.payload;
       return { ...state, isSignedIn: isSignedIn, user: { token, username } };
-    case SIGN_IN_LOADING:
-      return { ...state, isSignedIn: action.isSignedIn };
     default:
       return state;
   }
