@@ -44,16 +44,25 @@ const App = (props) => {
       <CookieConsent
         location="bottom"
         buttonText="Sure"
+        overlay
         cookieName="cookiesAllowed"
         style={{
-          background: "rgba(0, 0, 0, 0.51)",
+          background: "rgba(0,0,0, 0.80)",
           fontSize: "1rem",
+          color: "#fff",
           fontWeight: "300",
         }}
-        buttonStyle={{ color: "#4e503b", fontSize: "1rem" }}
+        buttonStyle={{
+          color: "#eee",
+          fontSize: "0.8rem",
+          background: "#0d938f",
+        }}
         expires={150}
       >
-        This website uses cookies to enhance the user experience.
+        This website uses cookies. <br />
+        <span style={{ fontSize: "0.8rem", fontWeight: "100" }}>
+          Make sure cookies are enabled.
+        </span>
       </CookieConsent>
     </React.Fragment>
   );

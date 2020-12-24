@@ -10,15 +10,12 @@ import RegisterForm from "./RegisterForm";
 
 class Register extends React.Component {
   componentDidMount() {
+    document.getElementsByTagName("body")[0].classList.add("gradient");
+    document.getElementsByTagName("body")[0].classList.remove("list");
     let { cookies } = this.props;
     if (cookies.get("authtoken")) {
       return history.push("/");
     }
-  }
-
-  componentDidMount() {
-    document.getElementsByTagName("body")[0].classList.add("gradient");
-    document.getElementsByTagName("body")[0].classList.remove("list");
   }
 
   onSubmit = (formValues) => {
