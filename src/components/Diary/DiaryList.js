@@ -19,9 +19,9 @@ class DiaryList extends React.Component {
   }
 
   renderDiaryList = () => {
-    let { diaries } = this.props;
-    if (diaries.count > 0) {
-      return diaries.results.map((diary) => {
+    let { count, results } = this.props;
+    if (count > 0) {
+      return results.map((diary) => {
         return (
           <DiaryItem
             id={diary.id}
@@ -39,7 +39,7 @@ class DiaryList extends React.Component {
           404 Not Found
         </div>
       );
-    } else if (diaries.count === 0) {
+    } else if (count === 0) {
       return (
         <p>
           No diaries till now.
@@ -52,22 +52,7 @@ class DiaryList extends React.Component {
     }
   };
 
-  shouldComponentUpdate(nextProps) {
-    console.log(this.props, nextProps);
-    if (nextProps.count === null) {
-      return false;
-    }
-    if (nextProps.count !== this.props.count) {
-      return true;
-    } else if (
-      nextProps.diaries.currentDiary !== this.props.diaries.currentDiary
-    ) {
-      return false;
-    }
-    return true;
-  }
   render() {
-    console.log("redering..");
     return (
       <Row>
         <Col>
@@ -80,8 +65,8 @@ class DiaryList extends React.Component {
   }
 }
 
-const mapStateToProps = ({ diaries }) => {
-  return { diaries: diaries, count: diaries.count, searched: diaries.searched };
+const mapStateToProps = ({ diaries: { count, results, searched } }) => {
+  return { results: results, count: count, searched: searched };
 };
 
 export default connect(mapStateToProps, { fetchDiarys })(DiaryList);

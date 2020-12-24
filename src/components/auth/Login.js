@@ -44,7 +44,16 @@ class Login extends React.Component {
       this.props.cookies.set("authtoken", tokenName);
     }
   }
-  0;
+
+  shouldComponentUpdate(nextProps) {
+    if (this.props.user === null) {
+      return false;
+    }
+    if (this.props.loading !== nextProps.loading) {
+      return false;
+    }
+    return true;
+  }
   render() {
     return (
       <div className="row justify-content-md-center">
@@ -55,7 +64,11 @@ class Login extends React.Component {
           <GoogleLoginButton />
           <FacebookLoginButton />
 
-          <div className="line">Or</div>
+          <div className="line">
+            <span class="line-right"></span>
+            <span class="line-text">Or</span>
+            <span class="line-left"></span>
+          </div>
 
           <LoginForm
             onSubmit={this.onSubmit}
