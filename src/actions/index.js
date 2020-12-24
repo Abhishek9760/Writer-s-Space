@@ -9,7 +9,7 @@ import {
   googleClientSecret,
   facebookClientID,
   facebookClientSecret,
-} from "./cred";
+} from "../constants/cred";
 import {
   SIGN_IN,
   SIGN_IN_LOADING,

@@ -1,7 +1,8 @@
 import axios from "axios";
+import { apiURL } from "../constants/oauth";
 
 export default axios.create({
-  baseURL: "https://abhi102.pythonanywhere.com/api/",
+  baseURL: apiURL,
   headers: {
     "Content-Type": "application/json",
   },

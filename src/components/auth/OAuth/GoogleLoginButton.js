@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 import "./GoogleLoginButton.css";
 import Spinner from "react-bootstrap/Spinner";
 
+import { googleClientId } from "../../../constants/oauth";
+
 const googleLoginFailure = (res) => {
   console.log(res);
 };
@@ -13,7 +15,7 @@ const googleLoginFailure = (res) => {
 const GoogleLoginButton = (props) => {
   return (
     <GoogleLogin
-      clientId="984792856479-vbl9011ikj3ais9375j98f9mlik84v68.apps.googleusercontent.com"
+      clientId={googleClientId}
       buttonText="Login"
       render={(renderProps) => (
         <button
