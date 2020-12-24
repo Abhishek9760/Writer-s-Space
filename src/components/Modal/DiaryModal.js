@@ -1,16 +1,7 @@
 import React from "react";
-import { connect } from "react-redux";
 import Spinner from "react-bootstrap/Spinner";
 
-const confirmModal = ({
-  title,
-  closeModal,
-  text,
-  confirmAction,
-  confirmBtnText,
-  cancelBtnText,
-  btnLoading,
-}) => {
+const diaryModal = ({ title, closeModal, children, loading }) => {
   return (
     <div className="modal-content">
       <div className="modal-header">
@@ -26,14 +17,15 @@ const confirmModal = ({
           </span>
         </button>
       </div>
-      <div className="modal-body">{text}</div>
+      <div className="modal-body">{children}</div>
       <div className="modal-footer">
         <button
-          onClick={confirmAction}
+          type="submit"
+          form="diary-form"
           className="btn btn-primary"
-          disabled={btnLoading}
+          disabled={loading}
         >
-          {btnLoading ? (
+          {loading ? (
             <>
               <Spinner
                 className="image-upload"
@@ -43,9 +35,10 @@ const confirmModal = ({
                 role="status"
                 aria-hidden="true"
               />
+              <span>Saving...</span>
             </>
           ) : (
-            confirmBtnText || "Yes"
+            "Save Changes"
           )}
         </button>
         <button
@@ -54,15 +47,11 @@ const confirmModal = ({
           data-dismiss="modal"
           onClick={closeModal}
         >
-          {cancelBtnText || "Close"}
+          Close
         </button>
       </div>
     </div>
   );
 };
 
-const mapStateToProps = ({ loading: { deleteLoading } }) => {
-  return { btnLoading: deleteLoading };
-};
-
-export default connect(mapStateToProps, {})(confirmModal);
+export default diaryModal;

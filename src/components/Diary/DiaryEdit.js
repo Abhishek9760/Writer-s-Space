@@ -13,7 +13,7 @@ const EditDiary = (props) => {
         form: <DiaryEditForm onSubmit={onSubmit} />,
         closeModal: props.hideModal,
       },
-      "create"
+      "edit"
     );
   };
 

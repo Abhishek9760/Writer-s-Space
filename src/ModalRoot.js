@@ -8,6 +8,7 @@ const MODAL_TYPES = {
   alert: modalTypes.alertModal,
   create: modalTypes.diaryCreateModal,
   confirm: modalTypes.confirmModal,
+  edit: modalTypes.diaryEditModal,
   // 'delete': modalTypes.deleteModal,
   // 'prompt': modalTypes.promptModal
 };

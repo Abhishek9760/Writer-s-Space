@@ -24,9 +24,12 @@ import {
   SEARCH_LOADING,
   RESET,
   EDIT_DIARY,
-  LOADING,
   GOOGLE_LOGIN_LOADING,
   FACEBOOK_LOGIN_LOADING,
+  CREATE_LOADING,
+  EDIT_LOADING,
+  DELETE_LOADING,
+  REGISTER_LOADING,
 } from "./types";
 import { info, success, dark } from "./toasts";
 import FormData from "form-data";
@@ -69,7 +72,6 @@ export const facebookLogin = (response) => async (dispatch) => {
       const username = response.name.replaceAll(" ", "");
       cookies.set("authtoken", token + "$" + username);
       dark("Welcome 😊");
-      dispatch({ type: LOADING, Loading: false });
       console.log("redirecting..");
       return history.push("/diary");
     })
@@ -105,7 +107,7 @@ export const googleLogin = (response) => async (dispatch) => {
     });
 };
 export const signIn = (formValues) => async (dispatch) => {
-  dispatch({ type: SIGN_IN_LOADING, isSignedIn: "loading" });
+  dispatch({ type: SIGN_IN_LOADING, loading: true });
   try {
     const response = await axios.post("/auth/token/", {
       ...formValues,
@@ -123,7 +125,7 @@ export const signIn = (formValues) => async (dispatch) => {
     });
     history.push("/diary");
   } catch (error) {
-    dispatch({ type: SIGN_IN_LOADING, isSignedIn: false });
+    dispatch({ type: SIGN_IN_LOADING, loading: false });
     if (error.response.status === 400) {
       dispatch(
         showModal({
@@ -152,7 +154,9 @@ export const saveTokAndUsername = (token, username) => (dispatch) => {
 };
 
 export const signUp = (formValues) => async (dispatch) => {
+  dispatch({ type: REGISTER_LOADING, loading: true });
   const response = await axios.post("/auth/register/", { ...formValues });
+  dispatch({ type: REGISTER_LOADING, loading: false });
   dark("Registered Successfully.");
   dispatch({ type: SIGN_UP, payload: response.data });
   history.push("/");
@@ -166,7 +170,7 @@ export const currentURL = (url) => (dispatch) => {
 };
 
 export const searchDiarys = (query) => async (dispatch, getState) => {
-  dispatch({ type: SEARCH_LOADING, search: true });
+  dispatch({ type: SEARCH_LOADING, loading: true });
   if (!query) {
     return dispatch(fetchDiarys());
   }
@@ -181,7 +185,7 @@ export const searchDiarys = (query) => async (dispatch, getState) => {
       },
     }
   );
-  dispatch({ type: SEARCH_LOADING, search: false });
+  dispatch({ type: SEARCH_LOADING, loading: false });
   dispatch({ type: SEARCH_DIARYS, payload: response.data, searched: true });
 };
 
@@ -212,7 +216,7 @@ export const fetchDiarys = (next = null, prev = null, mainUrl = null) => async (
   });
   let payload = response.data;
   dispatch({ type: SEARCH_DIARYS, searched: false });
-  dispatch({ type: SEARCH_LOADING, search: false });
+  dispatch({ type: SEARCH_LOADING, loading: false });
   dispatch({ type: FETCH_DIARYS, payload: payload });
 };
 
@@ -243,7 +247,7 @@ export const fetchDiary = (id = null, empty = false) => async (
 export const createDiary = (formValues) => async (dispatch, getState) => {
   let token = getState().data.user.token;
   dispatch(hideModal());
-  dispatch({ type: LOADING, Loading: true });
+  dispatch({ type: CREATE_LOADING, loading: true });
   let data = new FormData();
   data.append("title", formValues.title);
   if (formValues.text) {
@@ -280,7 +284,7 @@ export const createDiary = (formValues) => async (dispatch, getState) => {
       if (formValues.image) {
         success("Image upload complete.");
       }
-      dispatch({ type: LOADING, Loading: false });
+      dispatch({ type: CREATE_LOADING, loading: false });
 
       dispatch(fetchDiarys());
     });
@@ -289,14 +293,14 @@ export const createDiary = (formValues) => async (dispatch, getState) => {
 export const deleteDiary = (id) => async (dispatch, getState) => {
   let token = getState().data.user.token;
   dispatch(hideModal());
-  dispatch({ type: LOADING, Loading: true });
+  dispatch({ type: DELETE_LOADING, loading: true });
   await axios.delete(`/diary/${id}/`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
   success("Deleted successfully.");
-  dispatch({ type: LOADING, Loading: false });
+  dispatch({ type: DELETE_LOADING, loading: false });
   dispatch(fetchDiarys());
   dispatch(fetchDiary(null, true));
 };
@@ -304,6 +308,7 @@ export const deleteDiary = (id) => async (dispatch, getState) => {
 export const editDiary = (id, formValues) => async (dispatch, getState) => {
   let token = getState().data.user.token;
   let data = new FormData();
+  let title = getState().diaries.currentDiary.title;
   dispatch(hideModal());
   data.append("title", formValues.title);
   if (formValues.text) {
@@ -313,10 +318,14 @@ export const editDiary = (id, formValues) => async (dispatch, getState) => {
     data.append("image", formValues.image);
   }
 
-  if (!formValues.text && typeof formValues.image === "string") {
-    return dispatch(hideModal());
+  if (
+    !formValues.text &&
+    typeof formValues.image === "string" &&
+    title === formValues.title
+  ) {
+    return;
   }
-  dispatch({ type: LOADING, Loading: true });
+  dispatch({ type: EDIT_LOADING, loading: true });
   let toastId = null;
 
   const response = await axios.put(`/diary/${id}/`, data, {
@@ -338,7 +347,7 @@ export const editDiary = (id, formValues) => async (dispatch, getState) => {
     toast.dismiss(toastId);
   }
   success("Saved");
-  dispatch({ type: LOADING, Loading: false });
+  dispatch({ type: EDIT_LOADING, loading: false });
   const mainUrl = getState().url.url;
   dispatch({ type: EDIT_DIARY, payload: response.data });
   dispatch(fetchDiarys(null, null, mainUrl));

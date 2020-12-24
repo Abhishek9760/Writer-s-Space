@@ -4,27 +4,25 @@ import { createDiary, showModal, hideModal } from "../../actions";
 import { connect } from "react-redux";
 import { DiaryCreateForm } from "./Forms/DiaryForm";
 
-class DiaryCreate extends React.Component {
-  onSubmit = (formValues) => {
-    this.props.createDiary(formValues);
+const diaryCreate = (props) => {
+  const onSubmit = (formValues) => {
+    props.createDiary(formValues);
   };
 
-  openCreateModal = () => {
-    this.props.showModal(
+  const openCreateModal = () => {
+    props.showModal(
       {
         open: true,
         title: "Write your day",
-        form: <DiaryCreateForm onSubmit={this.onSubmit} />,
-        closeModal: this.props.hideModal,
+        form: <DiaryCreateForm onSubmit={onSubmit} />,
+        closeModal: props.hideModal,
       },
       "create"
     );
   };
 
-  render() {
-    return <span onClick={this.openCreateModal}>{this.props.children}</span>;
-  }
-}
+  return <span onClick={openCreateModal}>{props.children}</span>;
+};
 
 const mapDispatchToProps = (dispatch) => ({
   hideModal: () => dispatch(hideModal()),
@@ -35,4 +33,4 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(createDiary(token, formValues, username)),
 });
 
-export default connect(null, mapDispatchToProps)(DiaryCreate);
+export default connect(null, mapDispatchToProps)(diaryCreate);

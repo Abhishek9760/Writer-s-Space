@@ -60,7 +60,7 @@ class Login extends React.Component {
           <LoginForm
             onSubmit={this.onSubmit}
             btnText={
-              this.props.isSignedIn === "loading" ? (
+              this.props.loading ? (
                 <Spinner
                   as="span"
                   animation="border"
@@ -72,7 +72,7 @@ class Login extends React.Component {
                 "Login"
               )
             }
-            disabled={this.props.isSignedIn === "loading" ? true : false}
+            disabled={this.props.loading ? true : false}
           />
           <p className="my-2">
             Not a user?{" "}
@@ -86,8 +86,8 @@ class Login extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { ...state.data };
+const mapStateToProps = ({ data: { user }, loading: { signInLoading } }) => {
+  return { user: user, loading: signInLoading };
 };
 
 export default withCookies(connect(mapStateToProps, mapDispatchToProps)(Login));

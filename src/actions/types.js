@@ -1,9 +1,14 @@
 export const SIGN_IN = "SIGN_IN";
-export const SIGN_IN_LOADING = "SIGN_IN_LOADING";
-export const SEARCH_LOADING = "SEARCH_LOADING";
+
 export const GOOGLE_LOGIN_LOADING = "GOOGLE_LOGIN_LOADING";
 export const FACEBOOK_LOGIN_LOADING = "FACEBOOK_LOGIN_LOADING";
-export const LOADING = "LOADING";
+export const SIGN_IN_LOADING = "SIGN_IN_LOADING";
+export const SEARCH_LOADING = "SEARCH_LOADING";
+export const DELETE_LOADING = "DELETE_LOADING";
+export const CREATE_LOADING = "CREATE_LOADING";
+export const EDIT_LOADING = "EDIT_LOADING";
+export const REGISTER_LOADING = "REGISTER_LOADING";
+
 export const SIGN_OUT = "SIGN_OUT";
 export const SIGN_UP = "SIGN_UP";
 export const HIDE_MODAL = "HIDE_MODAL";

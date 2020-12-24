@@ -2,14 +2,11 @@ import {
   FETCH_DIARYS,
   FETCH_DIARY,
   EDIT_DIARY,
-  SEARCH_LOADING,
-  LOADING,
   SEARCH_DIARYS,
 } from "../actions/types";
 import _ from "lodash";
 import moment from "moment";
 const INITIAL_STATE = {
-  search: false,
   searched: false,
   count: null,
   next: null,
@@ -18,7 +15,6 @@ const INITIAL_STATE = {
   currentDiary: {},
   currentURL: null,
   editDiary: {},
-  Loading: false,
 };
 
 const diaryReducer = (state = INITIAL_STATE, action) => {
@@ -35,8 +31,6 @@ const diaryReducer = (state = INITIAL_STATE, action) => {
       return { ...state, currentDiary: action.payload };
     case EDIT_DIARY:
       return { ...state, editDiary: action.payload };
-    case LOADING:
-      return { ...state, Loading: action.Loading };
     case SEARCH_DIARYS:
       if (!action.payload) {
         return { ...state, searched: action.searched };
@@ -50,8 +44,6 @@ const diaryReducer = (state = INITIAL_STATE, action) => {
       });
 
       return { ...state, ...action.payload, searched: action.searched };
-    case SEARCH_LOADING:
-      return { ...state, search: action.search };
     default:
       return state;
   }

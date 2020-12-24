@@ -12,7 +12,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 class DiaryList extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     document.getElementsByTagName("body")[0].classList.remove("gradient");
     document.getElementsByTagName("body")[0].classList.add("list");
     this.props.fetchDiarys();
@@ -51,7 +51,23 @@ class DiaryList extends React.Component {
       return <Spinner animation="border" />;
     }
   };
+
+  shouldComponentUpdate(nextProps) {
+    console.log(this.props, nextProps);
+    if (nextProps.count === null) {
+      return false;
+    }
+    if (nextProps.count !== this.props.count) {
+      return true;
+    } else if (
+      nextProps.diaries.currentDiary !== this.props.diaries.currentDiary
+    ) {
+      return false;
+    }
+    return true;
+  }
   render() {
+    console.log("redering..");
     return (
       <Row>
         <Col>

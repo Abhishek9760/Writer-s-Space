@@ -8,6 +8,7 @@ import Spinner from "react-bootstrap/Spinner";
 
 import "./Form.css";
 import asyncValidate from "./asyncValidation";
+import { connect } from "react-redux";
 
 class RegisterForm extends React.Component {
   renderError({ error, touched }) {
@@ -79,7 +80,7 @@ class RegisterForm extends React.Component {
         />
         <ButtonGroup aria-label="Basic example">
           <Button type="submit" varient="primary">
-            {this.props.btnText === "loading" ? (
+            {this.props.loading ? (
               <Spinner
                 as="span"
                 animation="border"
@@ -135,10 +136,19 @@ const validate = ({ username, email, password, password2 }) => {
 //   return warnings;
 // };
 
-export default reduxForm({
-  form: "registerForm",
-  validate: validate,
-  asyncValidate,
-  asyncBlurFields: ["username", "email"],
-  // warn: warn,
-})(RegisterForm);
+const mapStateToProps = ({ loading: { registerLoading } }) => {
+  return { loading: registerLoading };
+};
+
+export default connect(
+  mapStateToProps,
+  {}
+)(
+  reduxForm({
+    form: "registerForm",
+    validate: validate,
+    asyncValidate,
+    asyncBlurFields: ["username", "email"],
+    // warn: warn,
+  })(RegisterForm)
+);

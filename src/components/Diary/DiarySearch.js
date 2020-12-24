@@ -14,8 +14,8 @@ const DiarySearch = (props) => {
   );
 };
 
-const mapStateToProps = ({ diaries: { search } }) => {
-  return { search };
+const mapStateToProps = ({ loading: { searchLoading } }) => {
+  return { search: searchLoading };
 };
 
 export default connect(mapStateToProps, { searchDiarys })(DiarySearch);

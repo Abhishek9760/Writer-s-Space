@@ -9,9 +9,6 @@ import { signUp } from "../../actions";
 import RegisterForm from "./RegisterForm";
 
 class Register extends React.Component {
-  state = {
-    btnText: "Register",
-  };
   componentDidMount() {
     let { cookies } = this.props;
     if (cookies.get("authtoken")) {
@@ -19,13 +16,12 @@ class Register extends React.Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     document.getElementsByTagName("body")[0].classList.add("gradient");
     document.getElementsByTagName("body")[0].classList.remove("list");
   }
 
   onSubmit = (formValues) => {
-    this.setState({ btnText: "loading" });
     this.props.signUp(formValues);
   };
   render() {
@@ -41,10 +37,7 @@ class Register extends React.Component {
                 <h1 className="mb-5" style={{ fontWeight: "100" }}>
                   Register
                 </h1>
-                <RegisterForm
-                  onSubmit={this.onSubmit}
-                  btnText={this.state.btnText}
-                />
+                <RegisterForm onSubmit={this.onSubmit} />
                 <p className="my-2">
                   Already a user?{" "}
                   <Link to="/" className="link">
