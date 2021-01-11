@@ -46,7 +46,7 @@ const Header = (props) => {
           >
             <div className="container">
               <Navbar.Brand href="/">
-                <i className="fal fa-pen-square"></i> Writer's Spot
+                <i className="fal fa-pen-square"></i> My Diary
               </Navbar.Brand>
               <Navbar.Toggle aria-controls="responsive-navbar-nav" />
               <Navbar.Collapse id="responsive-navbar-nav">
