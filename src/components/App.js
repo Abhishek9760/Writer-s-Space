@@ -1,5 +1,5 @@
 import React from "react";
-import { Router, Route } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import history from "../history";
 
 import Home from "./Home";
@@ -9,6 +9,7 @@ import { ToastContainer } from "react-toastify";
 import CookieConsent from "react-cookie-consent";
 
 import DiaryHome from "./Diary/DiaryHome";
+import NotFound from "./404";
 import ModalRoot from "../ModalRoot";
 import { connect } from "react-redux";
 import { hideModal } from "../actions";
@@ -22,9 +23,12 @@ const App = (props) => {
       <Header />
       <div className="container">
         <Router history={history}>
-          <Route path="/" exact component={Home} />
-          <Route path="/diary" exact component={DiaryHome} />
-          <Route path="/register" exact component={Register} />
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/diary" exact component={DiaryHome} />
+            <Route path="/register" exact component={Register} />
+            <Route component={NotFound} />
+          </Switch>
         </Router>
       </div>
       <ModalRoot hideModal={props.hideModal} />
