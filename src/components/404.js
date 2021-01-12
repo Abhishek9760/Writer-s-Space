@@ -32,8 +32,8 @@ class NotFound extends React.Component {
               // fontWeight: "100",
               color: "white",
               fontSize: "3rem",
-              "-webkit-text-fill-color": "transparent",
-              "-webkit-text-stroke": "2px black",
+              WebkitTextFillColor: "transparent",
+              WebkitTextStroke: "2px black",
             }}
           >
             Not Found

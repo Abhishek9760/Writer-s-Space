@@ -31,7 +31,7 @@ import {
   DELETE_LOADING,
   REGISTER_LOADING,
 } from "./types";
-import { info, success, dark } from "./toasts";
+import { success, dark } from "./toasts";
 import FormData from "form-data";
 
 export const showModal = ({ modalProps, modalType }) => (dispatch) => {
@@ -56,7 +56,6 @@ export const reset = () => (dispatch) => {
 
 export const facebookLogin = (response) => async (dispatch) => {
   dispatch({ type: FACEBOOK_LOGIN_LOADING, loading: true });
-  console.log("loading facebook..");
   axios
     .post("/auth/convert-token/", {
       token: response.accessToken,
@@ -72,7 +71,6 @@ export const facebookLogin = (response) => async (dispatch) => {
       const username = response.name.replaceAll(" ", "");
       cookies.set("authtoken", token + "$" + username);
       dark("Welcome 😊");
-      console.log("redirecting..");
       return history.push("/diary");
     })
     .catch((err) => {
@@ -93,9 +91,7 @@ export const googleLogin = (response) => async (dispatch) => {
     .then((res) => {
       const username = response.profileObj.email.split("@")[0];
       const token = res.data.access_token;
-      console.log("setting cookies..");
       const cookies = new Cookies();
-      console.log(cookies);
       cookies.set("authtoken", token + "$" + username);
       dark("Welcome 😊");
       dispatch({ type: GOOGLE_LOGIN_LOADING, loading: false });
@@ -115,7 +111,6 @@ export const signIn = (formValues) => async (dispatch) => {
       client_secret: clientSecret,
       grant_type: "password",
     });
-    console.log("done");
     dispatch({ type: SIGN_IN_LOADING, loading: false });
     dark("Welcome 😊");
     dispatch({

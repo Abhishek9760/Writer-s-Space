@@ -5,7 +5,7 @@ import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props
 import { connect } from "react-redux";
 import "./GoogleLoginButton.css";
 import Spinner from "react-bootstrap/Spinner";
-import { facebookAppId, facebookRedirectURI } from "../../../constants/oauth";
+import { facebookAppId } from "../../../constants/oauth";
 
 const FacebookLoginButton = (props) => {
   return (
@@ -13,7 +13,6 @@ const FacebookLoginButton = (props) => {
       appId={facebookAppId}
       fields="name,email,picture"
       disableMobileRedirect={true}
-      // redirectUri={facebookRedirectURI}
       isMobile={false}
       render={(renderProps) => (
         <button

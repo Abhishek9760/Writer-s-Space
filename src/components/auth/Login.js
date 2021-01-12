@@ -28,7 +28,6 @@ class Login extends React.Component {
     document.getElementsByTagName("body")[0].classList.add("gradient");
     document.getElementsByTagName("body")[0].classList.remove("list");
     if (this.props.cookies.get("authtoken")) {
-      console.log("redirecting..");
       history.push("/diary");
     }
   }
@@ -45,7 +44,6 @@ class Login extends React.Component {
     }
   }
   render() {
-    console.log(this.props.loading);
     return (
       <div className="row justify-content-md-center">
         <div className="col-md-8">

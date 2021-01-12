@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import Spinner from "react-bootstrap/Spinner";
 import DiaryModal from "./DiaryModal";
 
 const diaryCreateModal = ({ title, closeModal, form, btnLoading }) => {
