@@ -101,6 +101,10 @@ a.navbar-brand {
   background-color: #4061a2d1;
 }
 
+.notfound {
+  background-color: #7c6ca6;
+}
+
 .search-icon {
   position: absolute;
   right: 5px;
