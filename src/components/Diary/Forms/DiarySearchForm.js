@@ -19,6 +19,7 @@ class DiaryForm extends React.Component {
   render() {
     return (
       <form
+        onSubmit={(e) => e.preventDefault()}
         className="form mb-3 input-group-sm"
         style={{ position: "relative" }}
       >

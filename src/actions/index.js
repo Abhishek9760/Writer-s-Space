@@ -289,7 +289,6 @@ export const createDiary = (formValues) => async (dispatch, getState) => {
 
 export const deleteDiary = (id) => async (dispatch, getState) => {
   let token = getState().data.user.token;
-  dispatch(hideModal());
   dispatch({ type: DELETE_LOADING, loading: true });
   await axios.delete(`/diary/${id}/`, {
     headers: {
@@ -297,16 +296,17 @@ export const deleteDiary = (id) => async (dispatch, getState) => {
     },
   });
   success("Deleted successfully.");
-  dispatch({ type: DELETE_LOADING, loading: false });
   dispatch(fetchDiarys());
   dispatch(fetchDiary(null, true));
+  dispatch(hideModal());
+  dispatch({ type: DELETE_LOADING, loading: false });
 };
 
 export const editDiary = (id, formValues) => async (dispatch, getState) => {
   let token = getState().data.user.token;
   let data = new FormData();
   let title = getState().diaries.currentDiary.title;
-  dispatch(hideModal());
+  dispatch({ type: EDIT_LOADING, loading: true });
   data.append("title", formValues.title);
   if (formValues.text) {
     data.append("text", formValues.text);
@@ -322,7 +322,6 @@ export const editDiary = (id, formValues) => async (dispatch, getState) => {
   ) {
     return;
   }
-  dispatch({ type: EDIT_LOADING, loading: true });
   let toastId = null;
 
   const response = await axios.put(`/diary/${id}/`, data, {
@@ -344,9 +343,10 @@ export const editDiary = (id, formValues) => async (dispatch, getState) => {
     toast.dismiss(toastId);
   }
   success("Saved");
-  dispatch({ type: EDIT_LOADING, loading: false });
   const mainUrl = getState().url.url;
   dispatch({ type: EDIT_DIARY, payload: response.data });
   dispatch(fetchDiarys(null, null, mainUrl));
-  dispatch(fetchDiary(id));
+  dispatch(fetchDiary(null, true));
+  dispatch(hideModal());
+  dispatch({ type: EDIT_LOADING, loading: false });
 };
