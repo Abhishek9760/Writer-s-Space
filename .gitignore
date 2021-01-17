@@ -27,4 +27,4 @@ yarn-error.log*
 src/constants/
 netlify.toml
 # /public/_redirects
-/public/manifest.json
+public/manifest.json
