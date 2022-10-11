@@ -1,7 +1,6 @@
 import { SIGN_IN, SIGN_OUT, SIGN_UP, TOK_USERNAME } from "../actions/types";
 
-const INITIAL_STATE = {isSignedIn: !true,  user: "",
-};
+const INITIAL_STATE = {isSignedIn: !true,  user: ""};
 
 const authReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
